@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="detect_mot" targetName="detect_mot_socketnode" />
+      <config projectName="detect_mot" targetName="detect_mot__dds_connext_idl" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_connext_cpp" />
+      <config projectName="detect_mot" targetName="uninstall" />
+      <config projectName="detect_mot" targetName="detect_mot_detectnode" />
+      <config projectName="detect_mot" targetName="detect_mot_yolonode" />
+      <config projectName="detect_mot" targetName="detect_mot_tracknode" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_fastrtps_cpp" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_introspection_c" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_connext_c" />
+      <config projectName="detect_mot" targetName="detect_mot__cpp" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_c" />
+      <config projectName="detect_mot" targetName="detect_mot__py" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_fastrtps_c__pyext" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_cpp" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_introspection_cpp" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_c__pyext" />
+      <config projectName="detect_mot" targetName="myplugins" />
+      <config projectName="detect_mot" targetName="detect_mot__python" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_generator_c" />
+      <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_fastrtps_c" />
+      <config projectName="detect_mot" targetName="detect_mot" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2c973287-4179-4eb6-b910-57517fa2da23" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ProjectId" id="1qsd79YYB6feFPF2a4P04YI13kM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="ctest.advertisement.all.test.configuration.is.created" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/launch" />
+    </key>
+  </component>
+  <component name="RunManager" selected="CMake Application.detect_mot">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__cpp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__cpp" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__dds_connext_idl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__dds_connext_idl" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__py" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__py" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__python" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__python" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_generator_c" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_generator_c" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_c" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_c" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_c__pyext" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_c__pyext" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_connext_c" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_connext_c" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_connext_cpp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_connext_cpp" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_cpp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_cpp" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_fastrtps_c" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_fastrtps_c" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_fastrtps_c__pyext" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_fastrtps_c__pyext" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_fastrtps_cpp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_fastrtps_cpp" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_introspection_c" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_introspection_c" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot__rosidl_typesupport_introspection_cpp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot__rosidl_typesupport_introspection_cpp" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot_detectnode" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot_detectnode" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="detect_mot" RUN_TARGET_NAME="detect_mot_detectnode">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot_socketnode" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot_socketnode" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="detect_mot" RUN_TARGET_NAME="detect_mot_socketnode">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot_tracknode" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot_tracknode" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="detect_mot" RUN_TARGET_NAME="detect_mot_tracknode">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="detect_mot_yolonode" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot_yolonode" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="detect_mot" RUN_TARGET_NAME="detect_mot_yolonode">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="myplugins" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="myplugins" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="uninstall" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="uninstall" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All CTest" type="CTestRunConfiguration" factoryName="CTestRun" PROGRAM_PARAMS="--extra-verbose" REDIRECT_INPUT="false" ELEVATE="false" WORKING_DIR="file://$CMakeCurrentGenerationDir$" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_PATH="$CTestCurrentExecutableName$" EXPLICIT_BUILD_TARGET_NAME="all" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.detect_mot" />
+      <item itemvalue="CMake Application.detect_mot__cpp" />
+      <item itemvalue="CMake Application.detect_mot__dds_connext_idl" />
+      <item itemvalue="CMake Application.detect_mot__python" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_generator_c" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_c" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_c__pyext" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_connext_c" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_connext_cpp" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_cpp" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_fastrtps_c" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_fastrtps_c__pyext" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_fastrtps_cpp" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_introspection_c" />
+      <item itemvalue="CMake Application.detect_mot__rosidl_typesupport_introspection_cpp" />
+      <item itemvalue="CMake Application.detect_mot_detectnode" />
+      <item itemvalue="CMake Application.detect_mot_socketnode" />
+      <item itemvalue="CMake Application.detect_mot_tracknode" />
+      <item itemvalue="CMake Application.detect_mot_yolonode" />
+      <item itemvalue="CMake Application.myplugins" />
+      <item itemvalue="CMake Application.uninstall" />
+      <item itemvalue="CMake Application.detect_mot__py" />
+      <item itemvalue="CTest Application.All CTest" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2c973287-4179-4eb6-b910-57517fa2da23" name="Default Changelist" comment="" />
+      <created>1617872063889</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617872063889</updated>
+      <workItem from="1617872065962" duration="5333000" />
+      <workItem from="1617934473272" duration="4862000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

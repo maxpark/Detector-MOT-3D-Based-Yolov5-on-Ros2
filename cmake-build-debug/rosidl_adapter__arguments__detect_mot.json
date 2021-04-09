@@ -1,0 +1,9 @@
+{
+  "package_name": "detect_mot",
+  "non_idl_tuples": [
+    "/home/mzc/code/ROS/dev_ws/src/detect_mot:msg/Track.msg",
+    "/home/mzc/code/ROS/dev_ws/src/detect_mot:msg/Frame.msg",
+    "/home/mzc/code/ROS/dev_ws/src/detect_mot:msg/Detection2d.msg",
+    "/home/mzc/code/ROS/dev_ws/src/detect_mot:msg/Objects.msg"
+  ]
+}

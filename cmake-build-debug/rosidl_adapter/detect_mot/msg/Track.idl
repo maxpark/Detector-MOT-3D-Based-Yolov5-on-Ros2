@@ -1,0 +1,38 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from detect_mot/msg/Track.msg
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/Point32.idl"
+
+module detect_mot {
+  module msg {
+    typedef int32 int32__4[4];
+    struct Track {
+      int32 id;
+
+      int32 classid;
+
+      string classname;
+
+      int32 age;
+
+      boolean information3d;
+
+      int32__4 bbox;
+
+      geometry_msgs::msg::Point32 position;
+
+      geometry_msgs::msg::Point32 velocity;
+
+      geometry_msgs::msg::Point32 size;
+
+      geometry_msgs::msg::Point32 position_e;
+
+      geometry_msgs::msg::Point32 velocity_e;
+
+      sequence<geometry_msgs::msg::Point32> pointcloud;
+
+      sequence<geometry_msgs::msg::Point32> trace;
+    };
+  };
+};

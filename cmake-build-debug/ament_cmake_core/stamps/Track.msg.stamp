@@ -1,0 +1,13 @@
+int32 id
+int32 classid
+string classname
+int32 age
+bool information3d
+int32[4] bbox
+geometry_msgs/Point32 position
+geometry_msgs/Point32 velocity
+geometry_msgs/Point32 size
+geometry_msgs/Point32 position_e
+geometry_msgs/Point32 velocity_e
+geometry_msgs/Point32[] pointcloud
+geometry_msgs/Point32[] trace

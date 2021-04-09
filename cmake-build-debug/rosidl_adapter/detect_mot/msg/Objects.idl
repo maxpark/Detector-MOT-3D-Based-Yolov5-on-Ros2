@@ -1,0 +1,18 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from detect_mot/msg/Objects.msg
+// generated code does not contain a copyright notice
+
+#include "detect_mot/msg/Detection2d.idl"
+#include "std_msgs/msg/Header.idl"
+
+module detect_mot {
+  module msg {
+    struct Objects {
+      std_msgs::msg::Header header;
+
+      sequence<detect_mot::msg::Detection2d> objects_front;
+
+      sequence<detect_mot::msg::Detection2d> objects_back;
+    };
+  };
+};

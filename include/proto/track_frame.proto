@@ -1,0 +1,19 @@
+syntax='proto3';
+
+package probf;
+
+message Person{
+    double px = 1;
+    double py = 2;
+    double vx = 3;
+    double vy = 4;
+    double sx = 5;
+    double sy = 6;
+}
+
+message TrackFrame{
+    int32 id = 1;
+    int32 sec = 2;
+    int32 nsec = 3;
+    repeated Person  person = 4;
+}

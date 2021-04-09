@@ -1,0 +1,25 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from detect_mot/msg/Frame.msg
+// generated code does not contain a copyright notice
+
+#include "detect_mot/msg/Track.idl"
+#include "geometry_msgs/msg/Pose2D.idl"
+#include "std_msgs/msg/Header.idl"
+
+module detect_mot {
+  module msg {
+    struct Frame {
+      std_msgs::msg::Header header;
+
+      int32 numof3d_front;
+
+      int32 numof3d_back;
+
+      geometry_msgs::msg::Pose2D robot_pose;
+
+      sequence<detect_mot::msg::Track> front_camera;
+
+      sequence<detect_mot::msg::Track> back_camera;
+    };
+  };
+};

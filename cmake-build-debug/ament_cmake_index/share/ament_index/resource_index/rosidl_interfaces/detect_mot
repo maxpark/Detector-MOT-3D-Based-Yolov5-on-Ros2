@@ -1,0 +1,8 @@
+msg/Detection2d.idl
+msg/Detection2d.msg
+msg/Frame.idl
+msg/Frame.msg
+msg/Objects.idl
+msg/Objects.msg
+msg/Track.idl
+msg/Track.msg
