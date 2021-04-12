@@ -25,7 +25,7 @@
 #define MAX_Y 3.0
 #define MAX_Z 2.0
 #define IOU_Threshold_max 0.5
-#define IOU_Threshold_min 0.01//IOU匹配阈值
+#define IOU_Threshold_min 0.05//IOU匹配阈值
 #define Fx 541.28 //焦距
 #define Fy 540.30
 #define Img_width 640

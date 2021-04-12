@@ -58,13 +58,13 @@ private:
         RCLCPP_INFO(this->get_logger(),"time_gap_ses="+std::to_string(msecs));
         auto pose= poseStamped->pose;
 //        std::cout<<"Pose_callback"<<std::endl;
-        Eigen::Vector3f  ea(0.0,0.0,std::asin(pose.orientation.x));
+        Eigen::Vector3f  ea(std::atan2(pose.orientation.y,pose.orientation.x),0.0,0.0);
        Eigen::Matrix3f rotation_matrix ;
        rotation_matrix = Eigen::AngleAxisf(ea[0], Eigen::Vector3f::UnitZ()) *
                          Eigen::AngleAxisf(ea[1], Eigen::Vector3f::UnitY()) *
                          Eigen::AngleAxisf(ea[2], Eigen::Vector3f::UnitX());
        Eigen::Vector3f t(pose.position.x,pose.position.y,pose.position.z);
-        RCLCPP_INFO(this->get_logger(),"Pose:x "+std::to_string(t(0))+",y "+std::to_string(t(1))+",er "+std::to_string(ea(2)));
+        RCLCPP_INFO(this->get_logger(),"Pose:x "+std::to_string(t(0))+",y "+std::to_string(t(1))+",er "+std::to_string(ea(0)));
         TR = Eigen::Transform<float, 3, Eigen::Affine>::Identity();//TR是一个全局变量 不依赖Ros2
        TR.rotate(rotation_matrix);TR.pretranslate(t);//位姿变换
        pose_init== true;
