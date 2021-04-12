@@ -1,0 +1,35 @@
+// generated from rosidl_generator_dds_idl/resource/idl.idl.em
+// with input from detect_mot:msg/Objects.idl
+// generated code does not contain a copyright notice
+#include "detect_mot/msg/dds_connext/Detection2d_.idl"
+#include "std_msgs/msg/dds_connext/Header_.idl"
+
+#ifndef __detect_mot__msg__objects__idl__
+#define __detect_mot__msg__objects__idl__
+
+
+module detect_mot {
+
+module msg {
+
+module dds_ {
+
+
+struct Objects_ {
+std_msgs::msg::dds_::Header_ header_;
+sequence<detect_mot::msg::dds_::Detection2d_> objects_front_;
+
+sequence<detect_mot::msg::dds_::Detection2d_> objects_back_;
+
+
+};
+
+
+};  // module dds_
+
+};  // module msg
+
+};  // module detect_mot
+
+
+#endif  // __detect_mot__msg__objects__idl__

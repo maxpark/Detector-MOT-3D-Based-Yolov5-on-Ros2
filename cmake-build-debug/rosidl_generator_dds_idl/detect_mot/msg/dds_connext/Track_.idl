@@ -1,0 +1,45 @@
+// generated from rosidl_generator_dds_idl/resource/idl.idl.em
+// with input from detect_mot:msg/Track.idl
+// generated code does not contain a copyright notice
+#include "geometry_msgs/msg/dds_connext/Point32_.idl"
+
+#ifndef __detect_mot__msg__track__idl__
+#define __detect_mot__msg__track__idl__
+
+
+module detect_mot {
+
+module msg {
+
+module dds_ {
+
+
+struct Track_ {
+long id_;
+long classid_;
+string classname_;
+long age_;
+boolean information3d_;
+long bbox_[4];
+
+geometry_msgs::msg::dds_::Point32_ position_;
+geometry_msgs::msg::dds_::Point32_ velocity_;
+geometry_msgs::msg::dds_::Point32_ size_;
+geometry_msgs::msg::dds_::Point32_ position_e_;
+geometry_msgs::msg::dds_::Point32_ velocity_e_;
+sequence<geometry_msgs::msg::dds_::Point32_> pointcloud_;
+
+sequence<geometry_msgs::msg::dds_::Point32_> trace_;
+
+
+};
+
+
+};  // module dds_
+
+};  // module msg
+
+};  // module detect_mot
+
+
+#endif  // __detect_mot__msg__track__idl__

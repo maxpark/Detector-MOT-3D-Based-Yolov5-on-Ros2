@@ -57,12 +57,12 @@ if(NOT generated_file)
 endif()
 
 # Set these up as variables to make reading the generated file easier
-set(CMAKE_COMMAND "/home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/bin/cmake/linux/bin/cmake") # path
+set(CMAKE_COMMAND "/home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/bin/cmake") # path
 set(source_file "/home/mzc/code/ROS/dev_ws/src/detect_mot/./include/detector/yololayer.cu") # path
 set(NVCC_generated_dependency_file "/home/mzc/code/ROS/dev_ws/src/detect_mot/cmake-build-debug/CMakeFiles/myplugins.dir/./include/detector/myplugins_generated_yololayer.cu.o.NVCC-depend") # path
 set(cmake_dependency_file "/home/mzc/code/ROS/dev_ws/src/detect_mot/cmake-build-debug/CMakeFiles/myplugins.dir/./include/detector/myplugins_generated_yololayer.cu.o.depend") # path
-set(CUDA_make2cmake "/home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/bin/cmake/linux/share/cmake-3.17/Modules/FindCUDA/make2cmake.cmake") # path
-set(CUDA_parse_cubin "/home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/bin/cmake/linux/share/cmake-3.17/Modules/FindCUDA/parse_cubin.cmake") # path
+set(CUDA_make2cmake "/home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindCUDA/make2cmake.cmake") # path
+set(CUDA_parse_cubin "/home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindCUDA/parse_cubin.cmake") # path
 set(build_cubin OFF) # bool
 set(CUDA_HOST_COMPILER "/usr/bin/cc") # path
 # We won't actually use these variables for now, but we need to set this, in
@@ -74,9 +74,9 @@ set(generated_cubin_file_internal "/home/mzc/code/ROS/dev_ws/src/detect_mot/cmak
 set(CUDA_NVCC_EXECUTABLE "/usr/local/cuda/bin/nvcc") # path
 set(CUDA_NVCC_FLAGS  ;; ) # list
 # Build specific configuration flags
+set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_DEBUG  ; )
 set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
-set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(nvcc_flags -m64;-Dmyplugins_EXPORTS) # list
 set(CUDA_NVCC_INCLUDE_DIRS [==[/usr/local/cuda/include;$<TARGET_PROPERTY:myplugins,INCLUDE_DIRECTORIES>]==]) # list (needs to be in lua quotes to address backslashes)
@@ -105,10 +105,10 @@ endif()
 
 # This is the list of host compilation flags.  It C or CXX should already have
 # been chosen by FindCUDA.cmake.
-set(CMAKE_HOST_FLAGS   -fPIC)
+set(CMAKE_HOST_FLAGS  -fpermissive  -fPIC)
+set(CMAKE_HOST_FLAGS_RELEASE  -O3 -Wall)
 set(CMAKE_HOST_FLAGS_DEBUG -g)
 set(CMAKE_HOST_FLAGS_MINSIZEREL -Os -DNDEBUG)
-set(CMAKE_HOST_FLAGS_RELEASE -O3 -DNDEBUG)
 set(CMAKE_HOST_FLAGS_RELWITHDEBINFO -O2 -g -DNDEBUG)
 
 # Take the compiler flags and package them up to be sent to the compiler via -Xcompiler
@@ -163,7 +163,7 @@ macro(cuda_execute_process status command)
     # copy and paste a runnable command line.
     set(cuda_execute_process_string)
     foreach(arg ${ARGN})
-      # If there are quotes, excape them, so they come through.
+      # If there are quotes, escape them, so they come through.
       string(REPLACE "\"" "\\\"" arg ${arg})
       # Args with spaces need quotes around them to get them to be parsed as a single argument.
       if(arg MATCHES " ")

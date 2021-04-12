@@ -77,7 +77,7 @@ private:
 public:
     YoloNode() : Node("yolo")
     {
-        capture_front.open(0);
+        capture_front.open(2);
         if(capture_front.isOpened() == true)
             RCLCPP_INFO(this->get_logger(),"camera_front is opened!");
 //            std::cout<<"isOpenedf:"<<std::endl ;
@@ -91,8 +91,8 @@ public:
 //            std::cout<<"Not Openedb:"<<std::endl ;
         capture_front.set(cv::CAP_PROP_FPS,30);
         capture_front.set(cv::CAP_PROP_FOURCC,cv::CAP_IMAGES);
-        capture_front.set(cv::CAP_PROP_FRAME_WIDTH,640);
-        capture_front.set(cv::CAP_PROP_FRAME_HEIGHT,360);
+        capture_front.set(cv::CAP_PROP_FRAME_WIDTH,Img_width);
+        capture_front.set(cv::CAP_PROP_FRAME_HEIGHT,Img_height);
 //        capture_back.set(cv::CAP_PROP_FPS,10);
 //        capture_back.set(cv::CAP_PROP_FOURCC,cv::CAP_IMAGES);
 //        capture_back.set(cv::CAP_PROP_FRAME_WIDTH,1280);

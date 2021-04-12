@@ -53,7 +53,6 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "."
   "../include"
   "/usr/local/cuda/include"
-  "/usr/include/aarch64-linux-gnu"
   "rosidl_generator_cpp"
   "rosidl_typesupport_fastrtps_cpp"
   "/opt/ros/dashing/include/std_msgs/msg/dds_fastrtps_c"

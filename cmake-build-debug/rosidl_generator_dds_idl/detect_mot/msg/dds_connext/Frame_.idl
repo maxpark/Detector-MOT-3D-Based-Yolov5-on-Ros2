@@ -1,0 +1,39 @@
+// generated from rosidl_generator_dds_idl/resource/idl.idl.em
+// with input from detect_mot:msg/Frame.idl
+// generated code does not contain a copyright notice
+#include "detect_mot/msg/dds_connext/Track_.idl"
+#include "geometry_msgs/msg/dds_connext/Pose2D_.idl"
+#include "std_msgs/msg/dds_connext/Header_.idl"
+
+#ifndef __detect_mot__msg__frame__idl__
+#define __detect_mot__msg__frame__idl__
+
+
+module detect_mot {
+
+module msg {
+
+module dds_ {
+
+
+struct Frame_ {
+std_msgs::msg::dds_::Header_ header_;
+long numof3d_front_;
+long numof3d_back_;
+geometry_msgs::msg::dds_::Pose2D_ robot_pose_;
+sequence<detect_mot::msg::dds_::Track_> front_camera_;
+
+sequence<detect_mot::msg::dds_::Track_> back_camera_;
+
+
+};
+
+
+};  // module dds_
+
+};  // module msg
+
+};  // module detect_mot
+
+
+#endif  // __detect_mot__msg__frame__idl__

@@ -44,6 +44,33 @@ void Kalmanf::KalmanFilterSetup(cv::Mat A,cv::Mat H,cv::Mat P,cv::Mat Q,cv::Mat 
     measurement = cv::Mat::zeros(measureNum, 1, CV_32F);
 //    std::cout<<"kalman setup para"<<std::endl;
 }
+void  Kalmanf:: KalmanSetTransitionMatrix(float dt){
+//        KF.transitionMatrix = (cv::Mat_<float>(StateNum, StateNum) <<
+//            1.0f,  0.0f,  0.0f,  0.0f, 0.0f,  0.0f,  1.0f, 0.0f, 0.0f,
+//            0.0f,  1.0f,  0.0f,  0.0f, 0.0f,  0.0f,  0.0f, 1.0f, 0.0f,
+//            0.0f,  0.0f,  1.0f,  0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 1.0f,
+//            0.0f,  0.0f,  0.0f,  1.0f, 0.0f,  0.0f,  0.0f, 0.0f, 0.0f,
+//            0.0f,  0.0f,  0.0f,  0.0f, 1.0f,  0.0f,  0.0f, 0.0f, 0.0f,
+//            0.0f,  0.0f,  0.0f,  0.0f, 0.0f,  1.0f,  0.0f, 0.0f, 0.0f,
+//            0.0f,  0.0f,  0.0f,  0.0f, 0.0f,  0.0f,  1.0f, 0.0f, 0.0f,
+//            0.0f,  0.0f,  0.0f,  0.0f, 0.0f,  0.0f,  0.0f, 1.0f, 0.0f,
+//            0.0f,  0.0f,  0.0f,  0.0f, 0.0f,  0.0f,  0.0f, 0.0f, 1.0f
+//    );
+    for (int i = 0; i < KF.transitionMatrix.rows; ++i) {
+        for (int j = 0; j < KF.transitionMatrix.cols; ++j) {
+            if (i==j){
+                if (i<StateNum/2)
+                    KF.transitionMatrix.at<float>(i,j)=1.0;
+                else
+                    KF.transitionMatrix.at<float>(i,j)=1.0;
+            }
+            if (i<StateNum/2){
+                if (StateNum-j+i==7)
+                    KF.transitionMatrix.at<float>(i,j)=dt;//根据时间间隔设置 10FPS
+            }
+        }
+    }
+}
 void Kalmanf::Kalmaninitstate(std::array<float, StateNum> position){
     for (int i = 0; i < StateNum; ++i) {
         KF.statePost.at<float>(i)=position.at(i);

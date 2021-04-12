@@ -4,7 +4,8 @@
 #include "matcher/matcher.h"
 Matcher::Matcher(std::map<int,Oneclass> &Clu, std::vector<Object> &obj) {
    clusters=Clu;//聚类结果
-   biasx=Img_width/2;biasy=Img_height/2;
+//   biasx=Img_width/2;biasy=Img_height/2;
+    biasx=0;biasy=0;
    for(auto p:obj){
        p.area.x+=biasx;//转为点云映射重构平面像素坐标系
        p.area.y+=biasy;

@@ -1,0 +1,32 @@
+// generated from rosidl_generator_dds_idl/resource/idl.idl.em
+// with input from detect_mot:msg/Detection2d.idl
+// generated code does not contain a copyright notice
+
+#ifndef __detect_mot__msg__detection2d__idl__
+#define __detect_mot__msg__detection2d__idl__
+
+
+module detect_mot {
+
+module msg {
+
+module dds_ {
+
+
+struct Detection2d_ {
+long classid_;
+string classname_;
+long bbox_[4];
+
+
+};
+
+
+};  // module dds_
+
+};  // module msg
+
+};  // module detect_mot
+
+
+#endif  // __detect_mot__msg__detection2d__idl__

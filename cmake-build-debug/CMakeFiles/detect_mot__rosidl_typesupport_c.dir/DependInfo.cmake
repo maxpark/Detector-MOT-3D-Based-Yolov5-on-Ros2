@@ -50,7 +50,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "."
   "../include"
   "/usr/local/cuda/include"
-  "/usr/include/aarch64-linux-gnu"
   "rosidl_generator_c"
   "rosidl_generator_cpp"
   "rosidl_typesupport_fastrtps_cpp"

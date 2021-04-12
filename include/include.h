@@ -31,6 +31,7 @@
 #define Img_width 640
 #define Img_height 360
 #define Pose_trans 1
+#define Stride 1
 #define S_w 0.6//人的尺寸假设 高1.7m 宽0.6m
 #define S_h 1.7
 

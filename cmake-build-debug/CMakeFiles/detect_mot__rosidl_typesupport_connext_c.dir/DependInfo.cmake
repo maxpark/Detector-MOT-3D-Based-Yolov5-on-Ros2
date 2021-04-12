@@ -81,7 +81,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "."
   "../include"
   "/usr/local/cuda/include"
-  "/usr/include/aarch64-linux-gnu"
   "/opt/ros/dashing/include/std_msgs/msg/dds_connext"
   "/opt/ros/dashing/include/std_msgs/srv/dds_connext"
   "/opt/ros/dashing/include/std_msgs/action/dds_connext"

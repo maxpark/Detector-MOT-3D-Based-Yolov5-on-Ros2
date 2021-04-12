@@ -38,9 +38,13 @@ private:
     std_msgs::msg::Header frame_header;
     int front_back=0,fd=0;//前后相机标志位 socketfd;
     bool  init= false,measure_update=false,fd_set= false;
+    long long frame_time=0,last_frame_time=0;
 
-void topic_callback_objects(const detect_mot::msg::Frame::SharedPtr msg){
+    void topic_callback_objects(const detect_mot::msg::Frame::SharedPtr msg){
    frame_header=msg->header;
+   long long temp=(long long int)(frame_header.stamp.sec)*1000;
+//        std::cout<<"temp:"<<temp<<std::endl;
+    frame_time=temp+frame_header.stamp.nanosec;
    for(auto obj:msg->front_camera){
        Detection det;
        det.classname=obj.classname;
@@ -52,73 +56,31 @@ void topic_callback_objects(const detect_mot::msg::Frame::SharedPtr msg){
        objects.push_back(det);
    }
     measure_update= true;
-    if (!init){
+    if (!init&&objects.size()>0){
         tracker_f.trackinit(objects);
         init = true;
+        last_frame_time=frame_time;
+        return;
     }
     time_callback();
 }
-    void send_frame(const geometry_msgs::msg::PoseArray  msg){
-//        RCLCPP_INFO(this->get_logger(),"-----send_frame---------");
-        long long time_frame;
-        probf::TrackFrame track_frame;
-        probf::Person* person;
-        time_frame=(long long)(msg.header.stamp.sec)*1000+(long long)(msg.header.stamp.nanosec);
-        track_frame.set_id((msg.header.stamp.sec%10)*1000+msg.header.stamp.nanosec);
-        track_frame.set_sec(msg.header.stamp.sec);
-        track_frame.set_nsec(msg.header.stamp.nanosec);
-        for (auto pose:msg.poses) {
-            probf::Person* person=track_frame.add_person();
-            person->set_px(pose.position.y);
-            person->set_py(pose.position.z);
-            person->set_vx(pose.orientation.x);
-            person->set_vy(pose.orientation.y);
-            person->set_sx(pose.orientation.z);
-            person->set_sy(pose.orientation.w);
-        }
-        RCLCPP_INFO(this->get_logger(),"nums of person:"+std::to_string(track_frame.person_size()));
-        for(auto p:track_frame.person()){
-            RCLCPP_INFO(this->get_logger(),"Person---px:"+std::to_string(p.px())+",py"+std::to_string(p.py())+",sx"+std::to_string(p.sx())+",sy"+std::to_string(p.sy())+",vx"+std::to_string(p.vx())+",vy"+std::to_string(p.vy()));
-        }
-        std::string data;
-        track_frame.SerializeToString(&data);
-        auto size=send(fd, data.c_str(),data.length(), 0);
-        RCLCPP_INFO(this->get_logger(),"send_time_size="+std::to_string(size));
-    }
-void topic_callback_socket(const std_msgs::msg::Int32::SharedPtr msg){
-    if (fd_set)
-        return;
-    else
-      fd_set= true;
-    fd=msg->data;
-    RCLCPP_INFO(this->get_logger(),"socket accept fd=:"+std::to_string(fd));
-}
-    void time_callback_test(){
-        geometry_msgs::msg::PoseArray frame;
-        frame.header.stamp=clock.now();
-        geometry_msgs::msg::Pose track;
-        track.position.y=frame.header.stamp.nanosec;;
-        RCLCPP_INFO(this->get_logger(),"x= "+std::to_string( track.position.y));
-        frame.poses.push_back(track);
-        publisher_frame->publish(frame);//发布frame
-    }
 //10hz 跟踪
 void time_callback(){
         auto time_f=std::clock();
         geometry_msgs::msg::PoseArray frame;
-        long long frame_time;
         //此处补上header
         frame.header.frame_id="track_frame";
         frame.header.stamp=frame_header.stamp;//取RGBD数据时间
-        long long temp=(long long int)(frame.header.stamp.sec)*1000;
-//        std::cout<<"temp:"<<temp<<std::endl;
-        frame_time=temp+frame.header.stamp.nanosec;
         if (init==false){
             return;
         }
+        float dt;
+        dt=(float)(frame_time-last_frame_time)/1000.0;
+        last_frame_time=frame_time;
+//        std::cout<<"dt="<<dt<<std::endl;
 //            auto start=std::clock();
-        tracker_f.predict();
-        if (objects.size()>0&&measure_update){
+        if (measure_update){
+            tracker_f.predict(dt);
             tracker_f.update(objects);
             measure_update= false;
             objects.clear();
@@ -164,7 +126,7 @@ void time_callback(){
                     A.at<float>(i,j)=1.0;
                 if (i<StateNum/2){
                     if (StateNum-j+i==7)
-                        A.at<float>(i,j)=0.13;//根据时间间隔设置 10FPS
+                        A.at<float>(i,j)=0.0333;//根据时间间隔设置 30FPS
                 }
             }
         }
@@ -191,10 +153,9 @@ void time_callback(){
 public:
     TrackNode() : Node("track"){
         set_kalman_matrix(A,H,P,Q,R);
-        tracker_f=Tracker(A,H,P,Q,R,0.9,1,2);
+        tracker_f=Tracker(A,H,P,Q,R,0.9,2,2);
         publisher_frame = this->create_publisher<geometry_msgs::msg::PoseArray>("/ph/core/track", 1);
         subscription_objects=this->create_subscription<detect_mot::msg::Frame>("/objects",1,std::bind((&TrackNode::topic_callback_objects),this,std::placeholders::_1));
-//        subscription_socket= this->create_subscription<std_msgs::msg::Int32>("/socket_fd",1,std::bind((&TrackNode::topic_callback_socket),this,std::placeholders::_1));
 //        timer_publish=this->create_wall_timer(50ms,std::bind(&TrackNode::time_callback,this));
     }
 

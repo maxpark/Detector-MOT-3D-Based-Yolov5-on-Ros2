@@ -18,12 +18,12 @@ DBSCAN::DBSCAN() {
 void DBSCAN::DBSCAN_Cluster(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud,cv::Size size) {
 //      show_point_cloud(cloud,"Original--");
     //降采样 体素5cm
-    Imagesize.height=size.height*2;
-    Imagesize.width=size.width*2;
-    image_boundary.x_max=Imagesize.width-size.width/2;
-    image_boundary.y_max=Imagesize.height-size.height/2;
-    image_boundary.x_min=-size.width/2;
-    image_boundary.y_min=-size.height/2;
+    Imagesize.height=size.height*Stride;
+    Imagesize.width=size.width*Stride;
+    image_boundary.x_max=Imagesize.width;
+    image_boundary.y_max=Imagesize.height;
+    image_boundary.x_min=0;
+    image_boundary.y_min=0;
 
 
     pcl::VoxelGrid<pcl::PointXYZI> vg;
@@ -37,7 +37,7 @@ void DBSCAN::DBSCAN_Cluster(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud,cv::Size
     tree->setInputCloud(cloud);
     DBSCANKdtreeCluster<pcl::PointXYZI> ec;
     ec.setCorePointMinPts(10);
-    ec.setClusterTolerance(0.15);
+    ec.setClusterTolerance(0.10);
     ec.setMinClusterSize(10);
     ec.setMaxClusterSize(1000);
     ec.setSearchMethod(tree);
@@ -73,7 +73,7 @@ void DBSCAN::DBSCAN_Cluster(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud,cv::Size
                 if (minx > pix.x()) minx = pix.x();if (miny > pix.y()) miny = pix.y();if (maxx < pix.x()) maxx = pix.x();if (maxy < pix.y()) maxy = pix.y();//寻找边界
             }
         }
-        if (minx <640) minx = 640;if (miny < 320) miny = 320;if (maxx >1920) maxx = 1920;if (maxy >1080) maxy = 1080;//限制矩形框大小位于RGB图像范围内
+        if (minx <0) minx = 0;if (miny < 0) miny = 0;if (maxx >=size.width) maxx = size.width-1;if (maxy >=size.height) maxy = size.height-1;//限制矩形框大小位于RGB图像范围内
         if (!Roc.pointcloud_clustered[classindex].ponits3d->points.empty()){
             Roc.pointcloud_clustered[classindex].images=cv::Rect(minx,miny,(maxx - minx), (maxy - miny));
 //            std::cout<<"RECT_cluster:"<<minx<<" "<<miny<<" "<<maxx<<" "<<maxy<<std::endl;

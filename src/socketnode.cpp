@@ -284,13 +284,13 @@ public:
         Eigen::Vector3d U_rot,U_tra;
 //        U_rot={u_rot.at(0),u_rot.at(1),u_rot.at(2)};//向上RGBD相机旋转姿态 //0.0,-0.702,0.00
 //        U_tra={u_tra.at(0),u_tra.at(1),u_tra.at(2)};//向上RGBD相机位置//0.365,-0.01,0.03
-        U_rot={0.0,-0.45,0.00};
+        U_rot={0.0,-0.50,0.00};
         U_tra={0.365,-0.01,0.03};
         std::cout<<"reparam_Utra:"<<U_tra<<std::endl;
         std::cout<<"reparam_Urot:"<<U_rot<<std::endl;
         U_out=getTFMatrix(U_rot,U_tra);
 //        U_in={u_ins.at(0),u_ins.at(1),u_ins.at(2),u_ins.at(3)};//107.282, 107.282,105.0, 60.0
-        U_in={107.282, 107.282,105.0, 60.0};
+        U_in={107.282, 107.282,106.0, 60.0};
         std::cout<<"reparam_Uin:"<<U_in<<std::endl;
     }
 };

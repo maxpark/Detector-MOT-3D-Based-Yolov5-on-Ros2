@@ -40,9 +40,10 @@ void Tracker::trackinit(std::vector<Detection> &detections){
         new_track(temp);
     }
 }
-void Tracker::predict() {
+void Tracker::predict(float dt) {
     kalman_output.clear();
     for (auto track:tracks) {
+        track.second.kf.KalmanSetTransitionMatrix(dt);
         auto predict=track.second.kf.Kalmanprediction();
 //        if (track.second.enable)
             kalman_output.insert(std::pair<int,std::array<float,StateNum>>(track.first,predict));
@@ -62,11 +63,12 @@ void Tracker::update(std::vector<Detection> &detections){
      else
         matcher3d.Matching(dIds);
     for (int i = 0; i < detections.size(); ++i){
-        //detection遍历 判断是否需要新加入trace
+        //detection遍历 判断是否需要新加入trace 获取当前状态
         int det_idx=i;
         int trackID;
         auto iter=std::find(dIds.begin(),dIds.end(),i);
         if(iter>=dIds.end()){
+//            std::cout<<"new--"<<tracks.size()<<std::endl;
             //新出现的目标未有trace对应
             track temp;
             trackID=trackIdNow;
@@ -83,6 +85,7 @@ void Tracker::update(std::vector<Detection> &detections){
         }
             //DEC有对应的trace；即可能之前出现过
         else {
+//            std::cout<<"matcherd"<<std::endl;
             int trackindx=iter-dIds.begin();//dec对应的tarck索引
             trackID=tIds.at(trackindx);
             //已经匹配上 更新坐标 尺寸
@@ -104,16 +107,19 @@ void Tracker::update(std::vector<Detection> &detections){
             tracks.at(trackID).ClassID=detections.at(det_idx).ClassID;
             tracks.at(trackID).classname=detections.at(det_idx).classname+std::to_string(trackID);
             if (tracks.at(trackID).Information_3D){
-                //具备直接的3D信息直接匹配
-                if (detections.at(det_idx).Information_3D){
+                if (!detections.at(det_idx).Information_3D){
+                    //由3D切换为2D
+                    tracks.at(trackID).lost3D++;
+                    //中途丢失3D信息用预测信息补全
+                    detections.at(det_idx).p={tracks.at(trackID).p.x+tracks.at(trackID).v.vx,tracks.at(trackID).p.y+tracks.at(trackID).v.vy,tracks.at(trackID).p.z+tracks.at(trackID).v.vz};
+
+                } else{
+                    //具备直接的3D信息直接匹配
                     tracks.at(trackID).lost3D=0;
                     tracks.at(trackID).s    =   detections.at(det_idx).s;
                     tracks.at(trackID).viz=detections.at(det_idx).viz;
                     tracks.at(trackID).points=detections.at(det_idx).points;
                     tracks.at(trackID).trace.push_back(cv::Point3f (tracks.at(trackID).p.x,tracks.at(trackID).p.y,tracks.at(trackID).p.z));
-                } else{//由3D切换为2D
-                    tracks.at(trackID).lost3D++;
-                    //稳定的track
                 }
             } else{
                 if (detections.at(det_idx).Information_3D){//由2D切换为3D
@@ -125,7 +131,7 @@ void Tracker::update(std::vector<Detection> &detections){
                     tracks.at(trackID).trace.push_back(cv::Point3f (detections.at(det_idx).p.x,detections.at(det_idx).p.y,detections.at(det_idx).p.z));//轨迹起始点为检测道到的当前位置
                     tracks.at(trackID).kf.Kalmaninitstate({detections.at(det_idx).p.x,detections.at(det_idx).p.y,detections.at(det_idx).p.z,(float )detections.at(det_idx).Bbox.x,(float )detections.at(det_idx).Bbox.y,(float )detections.at(det_idx).Bbox.width,(float )detections.at(det_idx).Bbox.height
                                                   ,0,0,0,0,0,0,0});
-//                    tracks.at(trackID).kf.Kalmanprediction();//重新初始化卡尔曼 加入3D的坐标
+                    tracks.at(trackID).kf.Kalmanprediction();//重新初始化卡尔曼 加入3D的坐标
 //                    std::cout<<"restate"<<trackID<<":"<<pridict.at(0)<<" "<<pridict.at(1)<<" "<<pridict.at(2)<<std::endl;
                 }
             }
@@ -133,22 +139,25 @@ void Tracker::update(std::vector<Detection> &detections){
             tracks.at(trackID).pe={(kalman_output.at(trackID).at(3)+kalman_output.at(trackID).at(5)/2-Img_height/2)/Img_height/2,(kalman_output.at(trackID).at(4)+kalman_output.at(trackID).at(6)/2-Img_width/2)/Img_width/2,1.0};
             if (detections.at(det_idx).Information_3D){
                 tracks.at(trackID).Information_3D= true;
-            } else if (tracks.at(trackID).lost3D>3){//3D 变为2D tracker 需要重新初始化 丢失3帧以上的3D信息
+            } else if (tracks.at(trackID).lost3D>death_period){//3D 变为2D tracker 需要重新初始化 丢失3帧以上的3D信息
                 tracks.at(trackID).Information_3D= false;
                 tracks.at(trackID).trace.clear();//轨迹清空
                 tracks.at(trackID).kf.Kalmaninitstate({0,0,0,(float )detections.at(det_idx).Bbox.x,(float )detections.at(det_idx).Bbox.y,(float )detections.at(det_idx).Bbox.width,(float )detections.at(det_idx).Bbox.height
                                                               ,0,0,0,tracks.at(trackID).ve.vx,tracks.at(trackID).ve.vy,tracks.at(trackID).ve.vz,tracks.at(trackID).ve.vz});
-//                tracks.at(trackID).kf.Kalmanprediction();//重新初始化卡尔曼
+                tracks.at(trackID).kf.Kalmanprediction();//重新初始化卡尔曼
             }
         }
     }
     for (int i = 0; i < tIds.size(); ++i){
-        //trace遍历---更新trace 以及判断是否trace已经过期
-        int det_idx = dIds[i];
+        //trace遍历---更新trace 以及判断是否trace已经过期 update
+        int det_idx = -1;
+        if (dIds.size()>0)
+             det_idx = dIds[i];
         int trackID = tIds[i];
+//        std::cout<<"detid"<<det_idx<<std::endl;
         tracks.at(trackID).age++;//无论如何增加age
-        if (cost_matrix[i][det_idx] > max_Iou ||det_idx<0) {//匹配失败
-//            std::cout <<trackID<<":nomatched:"<<cost_matrix[i][det_idx]<<std::endl;
+        if (det_idx<0||cost_matrix[i][det_idx] > max_Iou) {//匹配失败
+//            std::cout <<trackID<<":nomatched:"<<std::endl;//<<cost_matrix[i][det_idx]
             tracks.at(trackID).Nomatched++;//不匹配时间
             if (tracks.at(trackID).Nomatched >= death_period){
                 //大于容忍时间销毁track
@@ -159,7 +168,7 @@ void Tracker::update(std::vector<Detection> &detections){
             }
             else{//刚匹配失败不足以被删除 进入等待 使用历史信息更新
                 Detection det;//新建一个虚拟DET
-                det.p={kalman_output.at(trackID).at(0),kalman_output.at(trackID).at(1),kalman_output.at(trackID).at(2)};
+                det.p={tracks.at(trackID).p.x+tracks.at(trackID).v.vx,tracks.at(trackID).p.y+tracks.at(trackID).v.vy,tracks.at(trackID).p.z+tracks.at(trackID).v.vz};//{kalman_output.at(trackID).at(0),kalman_output.at(trackID).at(1),kalman_output.at(trackID).at(2)};
                 det.Bbox={(int)kalman_output.at(trackID).at(3),(int)kalman_output.at(trackID).at(4)
                                          ,(int)kalman_output.at(trackID).at(5),(int )kalman_output.at(trackID).at(6)};
 //                cout<<trackID<<":"<<det.Bbox.x<<" "<<det.Bbox.x<<" "<<det.Bbox.width<<" "<<det.Bbox.height<<endl;
@@ -167,18 +176,20 @@ void Tracker::update(std::vector<Detection> &detections){
                         {det.p.x, det.p.y, det.p.z,
                          (float )det.Bbox.x,(float )det.Bbox.y,(float )det.Bbox.width,(float )det.Bbox.height});
             }
-
         }
         else {
-//            std::cout<<"matched"<<std::endl;
             //trace匹配
             tracks.at(trackID).Nomatched = 0;//不匹配时间
             //更新tracks的数据
             detections.at(det_idx).ID = trackID;
             //测量更新
-            if (detections.at(det_idx).Information_3D== false&&tracks.at(trackID).Information_3D){//应对中途丢失3D信息的状态
-                detections.at(det_idx).p={kalman_output.at(trackID).at(0),kalman_output.at(trackID).at(1),kalman_output.at(trackID).at(2)};
-                std::cout<<"NO 3D Again"<<trackID<<" "<<kalman_output.at(trackID).at(0)<<" "<<kalman_output.at(trackID).at(1)<<" "<<kalman_output.at(trackID).at(2)<<std::endl;
+//            if (detections.at(det_idx).Information_3D== false&&tracks.at(trackID).Information_3D){//应对中途丢失3D信息的状态
+//                detections.at(det_idx).p={kalman_output.at(trackID).at(0),kalman_output.at(trackID).at(1),kalman_output.at(trackID).at(2)};
+//                std::cout<<"NO 3D Again"<<trackID<<" "<<kalman_output.at(trackID).at(0)<<" "<<kalman_output.at(trackID).at(1)<<" "<<kalman_output.at(trackID).at(2)<<std::endl;
+//            }
+            if (tracks.at(trackID).trace.size()>=2){
+                bool flag=update_filter(tracks.at(trackID).trace.at(tracks.at(trackID).trace.size()-1),tracks.at(trackID).trace.at(tracks.at(trackID).trace.size()-2),detections.at(det_idx).p);
+
             }
             tracks.at(trackID).kf.kalmanUpdate(
                     {detections.at(det_idx).p.x, detections.at(det_idx).p.y, detections.at(det_idx).p.z,
@@ -186,7 +197,12 @@ void Tracker::update(std::vector<Detection> &detections){
         }
         check_state(trackID);
     }
+//    std::cout<<"track list over"<<std::endl;
 }
+bool  Tracker::update_filter(cv::Point3f p0,cv::Point3f p1,Position & update){
+
+}
+
 void Tracker::remove_track(int trackId){
     tracks.erase(trackId);
 }

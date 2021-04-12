@@ -64,7 +64,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "."
   "../include"
   "/usr/local/cuda/include"
-  "/usr/include/aarch64-linux-gnu"
   "/opt/ros/dashing/include"
   )
 

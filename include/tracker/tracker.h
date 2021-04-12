@@ -24,9 +24,10 @@ public:
     void new_track(track &tr);
     void remove_track(int trackId);
     void trackinit(std::vector<Detection> &detections);
-    void predict();
+    void predict(float dt);
     void update(std::vector<Detection> &detections);
     void check_state(int trackId);
+    bool update_filter(cv::Point3f p0,cv::Point3f p1,Position & update);
     std::vector<Track_report> report_tracks();
     std::map<int,track> show_tracks();
 };

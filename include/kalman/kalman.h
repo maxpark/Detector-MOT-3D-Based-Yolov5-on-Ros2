@@ -19,6 +19,7 @@ public:
     Kalmanf();
     Kalmanf(int stateNum,int measureNum);
     void KalmanFilterSetup(cv::Mat A,cv::Mat H,cv::Mat P,cv::Mat Q,cv::Mat R);//初始化设置KF滤波器
+    void KalmanSetTransitionMatrix(float dt);
     void Kalmaninitstate(std::array<float,StateNum> position);//初始化状态
     std::array<float,StateNum> Kalmanprediction();//预测当前位置
     void kalmanUpdate(std::array<float, MeasureNum> newpoint);//更新状态量
