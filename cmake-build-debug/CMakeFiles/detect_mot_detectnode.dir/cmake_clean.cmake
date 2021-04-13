@@ -8,7 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/detect_mot_detectnode.dir/src/lib/kalman.cpp.o"
   "CMakeFiles/detect_mot_detectnode.dir/src/lib/matcher.cpp.o"
   "CMakeFiles/detect_mot_detectnode.dir/src/lib/tools.cpp.o"
-  "CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.o"
+  "CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.o"
   "detect_mot_detectnode"
   "detect_mot_detectnode.pdb"
 )

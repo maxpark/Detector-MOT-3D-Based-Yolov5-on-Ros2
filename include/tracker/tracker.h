@@ -11,6 +11,7 @@
 class Tracker{
 private:
     std::map<int,track> tracks;
+    std::map<int,std::vector<Position>> track_filter;
     std::map<int,std::array<float,StateNum>> kalman_output;
     int max_age;//最大生存周期
     float max_Iou;//1-Max_IOU
@@ -27,7 +28,7 @@ public:
     void predict(float dt);
     void update(std::vector<Detection> &detections);
     void check_state(int trackId);
-    bool update_filter(cv::Point3f p0,cv::Point3f p1,Position & update);
+    bool update_filter(int id,Position & update);
     std::vector<Track_report> report_tracks();
     std::map<int,track> show_tracks();
 };

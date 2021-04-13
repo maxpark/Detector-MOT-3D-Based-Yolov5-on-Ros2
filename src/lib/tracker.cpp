@@ -18,12 +18,12 @@ void Tracker::new_track(track &tr) {
     tr.lost3D=0;
     tr.Nomatched=0;
     tr.ID=trackIdNow;
-    tr.Information_3D= false;
+//    tr.Information_3D= false;
     tr.enable= false;
     tr.kf=Kalmanf(StateNum,MeasureNum);
     tr.kf.KalmanFilterSetup(A,H,P,Q,R);
     tr.kf.Kalmaninitstate({tr.p.x,tr.p.y,tr.p.z,(float )tr.Bbox.x,(float )tr.Bbox.y,(float )tr.Bbox.width,(float )tr.Bbox.height
-                           ,tr.v.vx,tr.v.vy,tr.v.vz,tr.ve.vx,tr.ve.vy,tr.ve.vz,tr.ve.vz});
+                                  ,tr.v.vx,tr.v.vy,tr.v.vz,tr.ve.vx,tr.ve.vy,tr.ve.vz,tr.ve.vz});
 //    if (trackIdNow==3)
 //    tr.trace.push_back(cv::Point3f (tr.p.x,tr.p.y,tr.p.z));
     tracks.insert(std::pair<int,track>(trackIdNow,tr));
@@ -32,6 +32,7 @@ void Tracker::new_track(track &tr) {
 void Tracker::trackinit(std::vector<Detection> &detections){
     for (auto detection:detections){
         track temp;
+        temp.Information_3D=detection.Information_3D;
         temp.p=detection.p;temp.s=detection.s;
         temp.v={0.0,0.0,0.0};
         temp.Bbox=detection.Bbox;
@@ -46,7 +47,7 @@ void Tracker::predict(float dt) {
         track.second.kf.KalmanSetTransitionMatrix(dt);
         auto predict=track.second.kf.Kalmanprediction();
 //        if (track.second.enable)
-            kalman_output.insert(std::pair<int,std::array<float,StateNum>>(track.first,predict));
+        kalman_output.insert(std::pair<int,std::array<float,StateNum>>(track.first,predict));
     }
 }
 void Tracker::update(std::vector<Detection> &detections){
@@ -54,13 +55,13 @@ void Tracker::update(std::vector<Detection> &detections){
     std::vector<int> tIds;
     for(auto track:tracks){
 //        if (track.second.enable)
-            tIds.push_back(track.first);
+        tIds.push_back(track.first);
     }
     Matcher3D matcher3d;
     auto cost_matrix=matcher3d.Iou_cost_2D(kalman_output,detections,tracks);
     if (cost_matrix.empty())//修复track为0时无法产生代价矩阵的bug
         cout<<"cost martix empty!"<<std::endl;
-     else
+    else
         matcher3d.Matching(dIds);
     for (int i = 0; i < detections.size(); ++i){
         //detection遍历 判断是否需要新加入trace 获取当前状态
@@ -108,10 +109,16 @@ void Tracker::update(std::vector<Detection> &detections){
             tracks.at(trackID).classname=detections.at(det_idx).classname+std::to_string(trackID);
             if (tracks.at(trackID).Information_3D){
                 if (!detections.at(det_idx).Information_3D){
-                    //由3D切换为2D
-                    tracks.at(trackID).lost3D++;
-                    //中途丢失3D信息用预测信息补全
-                    detections.at(det_idx).p={tracks.at(trackID).p.x+tracks.at(trackID).v.vx,tracks.at(trackID).p.y+tracks.at(trackID).v.vy,tracks.at(trackID).p.z+tracks.at(trackID).v.vz};
+                    if (tracks.at(trackID).lost3D>death_period){//3D 变为2D tracker 需要重新初始化 丢失3帧以上的3D信息
+                        tracks.at(trackID).trace.clear();//轨迹清空
+                        tracks.at(trackID).kf.Kalmaninitstate({0,0,0,(float )detections.at(det_idx).Bbox.x,(float )detections.at(det_idx).Bbox.y,(float )detections.at(det_idx).Bbox.width,(float )detections.at(det_idx).Bbox.height
+                                                                      ,0,0,0,tracks.at(trackID).ve.vx,tracks.at(trackID).ve.vy,tracks.at(trackID).ve.vz,tracks.at(trackID).ve.vz});
+                        tracks.at(trackID).kf.Kalmanprediction();//重新初始化卡尔曼
+                    }else{
+                        //由3D切换为2D
+                        tracks.at(trackID).lost3D++;
+                        //中途丢失3D信息用预测信息补全
+                    }
 
                 } else{
                     //具备直接的3D信息直接匹配
@@ -130,29 +137,20 @@ void Tracker::update(std::vector<Detection> &detections){
                     tracks.at(trackID).points=detections.at(det_idx).points;
                     tracks.at(trackID).trace.push_back(cv::Point3f (detections.at(det_idx).p.x,detections.at(det_idx).p.y,detections.at(det_idx).p.z));//轨迹起始点为检测道到的当前位置
                     tracks.at(trackID).kf.Kalmaninitstate({detections.at(det_idx).p.x,detections.at(det_idx).p.y,detections.at(det_idx).p.z,(float )detections.at(det_idx).Bbox.x,(float )detections.at(det_idx).Bbox.y,(float )detections.at(det_idx).Bbox.width,(float )detections.at(det_idx).Bbox.height
-                                                  ,0,0,0,0,0,0,0});
-                    tracks.at(trackID).kf.Kalmanprediction();//重新初始化卡尔曼 加入3D的坐标
+                                                                  ,0,0,0,tracks.at(trackID).ve.vx,tracks.at(trackID).ve.vy,tracks.at(trackID).ve.vz,tracks.at(trackID).ve.vz});
+//                    tracks.at(trackID).kf.Kalmanprediction();//重新初始化卡尔曼 加入3D的坐标
 //                    std::cout<<"restate"<<trackID<<":"<<pridict.at(0)<<" "<<pridict.at(1)<<" "<<pridict.at(2)<<std::endl;
                 }
             }
             //估计的位置输出
             tracks.at(trackID).pe={(kalman_output.at(trackID).at(3)+kalman_output.at(trackID).at(5)/2-Img_height/2)/Img_height/2,(kalman_output.at(trackID).at(4)+kalman_output.at(trackID).at(6)/2-Img_width/2)/Img_width/2,1.0};
-            if (detections.at(det_idx).Information_3D){
-                tracks.at(trackID).Information_3D= true;
-            } else if (tracks.at(trackID).lost3D>death_period){//3D 变为2D tracker 需要重新初始化 丢失3帧以上的3D信息
-                tracks.at(trackID).Information_3D= false;
-                tracks.at(trackID).trace.clear();//轨迹清空
-                tracks.at(trackID).kf.Kalmaninitstate({0,0,0,(float )detections.at(det_idx).Bbox.x,(float )detections.at(det_idx).Bbox.y,(float )detections.at(det_idx).Bbox.width,(float )detections.at(det_idx).Bbox.height
-                                                              ,0,0,0,tracks.at(trackID).ve.vx,tracks.at(trackID).ve.vy,tracks.at(trackID).ve.vz,tracks.at(trackID).ve.vz});
-                tracks.at(trackID).kf.Kalmanprediction();//重新初始化卡尔曼
-            }
         }
     }
     for (int i = 0; i < tIds.size(); ++i){
         //trace遍历---更新trace 以及判断是否trace已经过期 update
         int det_idx = -1;
         if (dIds.size()>0)
-             det_idx = dIds[i];
+            det_idx = dIds[i];
         int trackID = tIds[i];
 //        std::cout<<"detid"<<det_idx<<std::endl;
         tracks.at(trackID).age++;//无论如何增加age
@@ -170,7 +168,7 @@ void Tracker::update(std::vector<Detection> &detections){
                 Detection det;//新建一个虚拟DET
                 det.p={tracks.at(trackID).p.x+tracks.at(trackID).v.vx,tracks.at(trackID).p.y+tracks.at(trackID).v.vy,tracks.at(trackID).p.z+tracks.at(trackID).v.vz};//{kalman_output.at(trackID).at(0),kalman_output.at(trackID).at(1),kalman_output.at(trackID).at(2)};
                 det.Bbox={(int)kalman_output.at(trackID).at(3),(int)kalman_output.at(trackID).at(4)
-                                         ,(int)kalman_output.at(trackID).at(5),(int )kalman_output.at(trackID).at(6)};
+                        ,(int)kalman_output.at(trackID).at(5),(int )kalman_output.at(trackID).at(6)};
 //                cout<<trackID<<":"<<det.Bbox.x<<" "<<det.Bbox.x<<" "<<det.Bbox.width<<" "<<det.Bbox.height<<endl;
                 tracks.at(trackID).kf.kalmanUpdate(
                         {det.p.x, det.p.y, det.p.z,
@@ -187,9 +185,15 @@ void Tracker::update(std::vector<Detection> &detections){
 //                detections.at(det_idx).p={kalman_output.at(trackID).at(0),kalman_output.at(trackID).at(1),kalman_output.at(trackID).at(2)};
 //                std::cout<<"NO 3D Again"<<trackID<<" "<<kalman_output.at(trackID).at(0)<<" "<<kalman_output.at(trackID).at(1)<<" "<<kalman_output.at(trackID).at(2)<<std::endl;
 //            }
-            if (tracks.at(trackID).trace.size()>=2){
-                bool flag=update_filter(tracks.at(trackID).trace.at(tracks.at(trackID).trace.size()-1),tracks.at(trackID).trace.at(tracks.at(trackID).trace.size()-2),detections.at(det_idx).p);
-
+            if (detections.at(det_idx).Information_3D!=tracks.at(trackID).Information_3D){
+                //2D-3D状态切换不再更新状态
+                if (tracks.at(trackID).Information_3D&&tracks.at(trackID).lost3D<death_period){
+                    detections.at(det_idx).p={tracks.at(trackID).p.x,tracks.at(trackID).p.y,tracks.at(trackID).p.z};
+                }
+                else{
+                    tracks.at(trackID).Information_3D=detections.at(det_idx).Information_3D;
+                    continue;
+                }
             }
             tracks.at(trackID).kf.kalmanUpdate(
                     {detections.at(det_idx).p.x, detections.at(det_idx).p.y, detections.at(det_idx).p.z,
@@ -199,8 +203,32 @@ void Tracker::update(std::vector<Detection> &detections){
     }
 //    std::cout<<"track list over"<<std::endl;
 }
-bool  Tracker::update_filter(cv::Point3f p0,cv::Point3f p1,Position & update){
-
+bool  Tracker::update_filter(int id,Position & update){
+    auto trc=track_filter.at(id);
+    track_filter.at(id).push_back(update);
+    float d0,d1,d2,T=0.2;
+    bool f0= false,f1= false,f2= false;
+    if (trc.size()<2)
+        {
+            return false;
+        } else{
+            d0= sqrt(pow((trc.at(1).x-trc.at(0).x),2)+ pow(trc.at(1).y-trc.at(0).y,2)+pow(trc.at(1).z-trc.at(0).z,2));
+            d1= sqrt(pow((trc.at(2).x-trc.at(1).x),2)+ pow(trc.at(2).y-trc.at(1).y,2)+pow(trc.at(2).z-trc.at(1).z,2));
+            d2= sqrt(pow((trc.at(2).x-trc.at(0).x),2)+ pow(trc.at(2).y-trc.at(0).y,2)+pow(trc.at(2).z-trc.at(0).z,2));
+        }
+    if (d1>T&&d2>T) f2= false;
+    if (d0>T&&d2>T) f0= false;
+    if (d0>T&&d1>T) f1= false;
+    if (d0>T&&d1>T&&d2>T) return false;
+    if (!f1){
+        track_filter.at(id).at(1)={(trc.at(0).x+trc.at(2).x)/2,(trc.at(0).y+trc.at(2).y)/2,(trc.at(0).z+trc.at(2).z)/2};
+    }
+    if (!f2){
+        update={2*trc.at(1).x-trc.at(0).x,2*trc.at(1).y-trc.at(0).y,2*trc.at(1).z-trc.at(0).z};
+        track_filter.at(id).at(2)=update;
+    }
+    track_filter.at(id).erase(track_filter.at(id).begin());
+    return true;
 }
 
 void Tracker::remove_track(int trackId){
@@ -248,8 +276,9 @@ std::map<int,track> Tracker::show_tracks(){
 }
 void Tracker::check_state(int trackId) {
     if (tracks.at(trackId).age>=birth_period){
-            tracks.at(trackId).enable= true;
+        tracks.at(trackId).enable= true;
     } else{
         tracks.at(trackId).enable= false;
     }
 }
+

@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
       <config projectName="detect_mot" targetName="detect_mot_socketnode" />
       <config projectName="detect_mot" targetName="detect_mot__dds_connext_idl" />
       <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_connext_cpp" />
-      <config projectName="detect_mot" targetName="uninstall" />
       <config projectName="detect_mot" targetName="detect_mot_detectnode" />
-      <config projectName="detect_mot" targetName="detect_mot_yolonode" />
+      <config projectName="detect_mot" targetName="uninstall" />
       <config projectName="detect_mot" targetName="detect_mot_tracknode" />
+      <config projectName="detect_mot" targetName="detect_mot_yolonode" />
       <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_fastrtps_cpp" />
       <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_introspection_c" />
       <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_connext_c" />
       <config projectName="detect_mot" targetName="detect_mot__cpp" />
       <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_c" />
-      <config projectName="detect_mot" targetName="detect_mot__py" />
       <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_fastrtps_c__pyext" />
+      <config projectName="detect_mot" targetName="detect_mot__py" />
       <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_cpp" />
       <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_introspection_cpp" />
       <config projectName="detect_mot" targetName="detect_mot__rosidl_typesupport_c__pyext" />
@@ -35,11 +32,31 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c973287-4179-4eb6-b910-57517fa2da23" name="Default Changelist" comment="">
+    <list default="true" id="fdbe3dc6-6f4b-4416-89ce-0b2e9f688818" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/detect_mot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/detect_mot.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_detectnode.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_detectnode.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_detectnode.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_detectnode.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_detectnode.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_detectnode.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_detectnode.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_detectnode.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_socketnode.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_socketnode.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_socketnode.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_socketnode.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_socketnode.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_socketnode.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_socketnode.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_socketnode.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_tracknode.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_tracknode.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_tracknode.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_tracknode.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_tracknode.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_tracknode.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_tracknode.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_tracknode.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_yolonode.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_yolonode.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_yolonode.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_yolonode.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_yolonode.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_yolonode.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_yolonode.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/detect_mot_yolonode.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/include.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/include.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/detectnode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/detectnode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/detect_mot.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/detect_mot.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/tracker/tracker.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/tracker/tracker.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/tracker.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/tracker.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tracknode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tracknode.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,33 +71,28 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1qsd79YYB6feFPF2a4P04YI13kM" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1r6KzpTZ5J1ICBaMUpg8Jj4E5HG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
     <property name="ctest.advertisement.all.test.configuration.is.created" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/launch" />
-    </key>
-  </component>
-  <component name="RunManager" selected="CMake Application.detect_mot_socketnode">
+  <component name="RunManager" selected="CMake Application.detect_mot_detectnode">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="detect_mot" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -191,7 +203,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All CTest" type="CTestRunConfiguration" factoryName="CTestRun" PROGRAM_PARAMS="--extra-verbose" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$CMakeCurrentGenerationDir$" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_PATH="$CTestCurrentExecutableName$" EXPLICIT_BUILD_TARGET_NAME="all" TEST_MODE="SUITE_TEST">
+    <configuration name="All CTest" type="CTestRunConfiguration" factoryName="CTestRun" PROGRAM_PARAMS="--extra-verbose" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$CMakeCurrentGenerationDir$" PASS_PARENT_ENVS_2="true" RUN_PATH="$CTestCurrentExecutableName$" EXPLICIT_BUILD_TARGET_NAME="all" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -231,20 +243,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2c973287-4179-4eb6-b910-57517fa2da23" name="Default Changelist" comment="" />
-      <created>1617872063889</created>
+      <changelist id="fdbe3dc6-6f4b-4416-89ce-0b2e9f688818" name="Default Changelist" comment="" />
+      <created>1618291366179</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1617872063889</updated>
-      <workItem from="1617872065962" duration="5333000" />
-      <workItem from="1617934473272" duration="27341000" />
-      <workItem from="1618034473005" duration="12967000" />
-      <workItem from="1618193596844" duration="89000" />
-      <workItem from="1618194006009" duration="9546000" />
-      <workItem from="1618206373997" duration="307000" />
-      <workItem from="1618209041826" duration="5136000" />
-      <workItem from="1618217980490" duration="3000" />
-      <workItem from="1618218048012" duration="8787000" />
+      <updated>1618291366179</updated>
+      <workItem from="1618291369741" duration="15061000" />
     </task>
     <servers />
   </component>
@@ -261,6 +265,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

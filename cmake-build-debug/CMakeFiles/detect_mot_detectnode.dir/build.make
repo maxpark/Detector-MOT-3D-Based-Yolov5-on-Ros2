@@ -193,18 +193,18 @@ CMakeFiles/detect_mot_detectnode.dir/src/lib/tools.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/detect_mot_detectnode.dir/src/lib/tools.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mzc/code/ROS/dev_ws/src/detect_mot/src/lib/tools.cpp -o CMakeFiles/detect_mot_detectnode.dir/src/lib/tools.cpp.s
 
-CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.o: CMakeFiles/detect_mot_detectnode.dir/flags.make
-CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.o: ../src/lib/tracker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mzc/code/ROS/dev_ws/src/detect_mot/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.o -c /home/mzc/code/ROS/dev_ws/src/detect_mot/src/lib/tracker.cpp
+CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.o: CMakeFiles/detect_mot_detectnode.dir/flags.make
+CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.o: ../src/lib/track.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mzc/code/ROS/dev_ws/src/detect_mot/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.o -c /home/mzc/code/ROS/dev_ws/src/detect_mot/src/lib/track.cpp
 
-CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mzc/code/ROS/dev_ws/src/detect_mot/src/lib/tracker.cpp > CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.i
+CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mzc/code/ROS/dev_ws/src/detect_mot/src/lib/track.cpp > CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.i
 
-CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mzc/code/ROS/dev_ws/src/detect_mot/src/lib/tracker.cpp -o CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.s
+CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mzc/code/ROS/dev_ws/src/detect_mot/src/lib/track.cpp -o CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.s
 
 # Object files for target detect_mot_detectnode
 detect_mot_detectnode_OBJECTS = \
@@ -217,7 +217,7 @@ detect_mot_detectnode_OBJECTS = \
 "CMakeFiles/detect_mot_detectnode.dir/src/lib/kalman.cpp.o" \
 "CMakeFiles/detect_mot_detectnode.dir/src/lib/matcher.cpp.o" \
 "CMakeFiles/detect_mot_detectnode.dir/src/lib/tools.cpp.o" \
-"CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.o"
+"CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.o"
 
 # External object files for target detect_mot_detectnode
 detect_mot_detectnode_EXTERNAL_OBJECTS =
@@ -231,7 +231,7 @@ detect_mot_detectnode: CMakeFiles/detect_mot_detectnode.dir/src/lib/hungarian.cp
 detect_mot_detectnode: CMakeFiles/detect_mot_detectnode.dir/src/lib/kalman.cpp.o
 detect_mot_detectnode: CMakeFiles/detect_mot_detectnode.dir/src/lib/matcher.cpp.o
 detect_mot_detectnode: CMakeFiles/detect_mot_detectnode.dir/src/lib/tools.cpp.o
-detect_mot_detectnode: CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.o
+detect_mot_detectnode: CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.o
 detect_mot_detectnode: CMakeFiles/detect_mot_detectnode.dir/build.make
 detect_mot_detectnode: /usr/lib/x86_64-linux-gnu/libboost_system.so
 detect_mot_detectnode: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so

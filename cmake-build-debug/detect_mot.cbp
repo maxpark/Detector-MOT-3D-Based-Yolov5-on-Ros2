@@ -2803,7 +2803,7 @@
 			<Option target="detect_mot_tracknode"/>
 			<Option target="detect_mot_detectnode"/>
 		</Unit>
-		<Unit filename="/home/mzc/code/ROS/dev_ws/src/detect_mot/src/lib/tracker.cpp">
+		<Unit filename="/home/mzc/code/ROS/dev_ws/src/detect_mot/src/lib/track.cpp">
 			<Option target="detect_mot_yolonode"/>
 			<Option target="detect_mot_socketnode"/>
 			<Option target="detect_mot_tracknode"/>

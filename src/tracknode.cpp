@@ -136,13 +136,13 @@ void time_callback(){
                     H.at<float>(i,j)=1.0;
             }
         }
-        setIdentity(Q, cv::Scalar::all(1e-4));            //系统噪声方差矩阵Q
+        setIdentity(Q, cv::Scalar::all(1e-2));            //系统噪声方差矩阵Q
         setIdentity(R, cv::Scalar::all(1e-3));        //测量噪声方差矩阵R
         setIdentity(P, cv::Scalar::all(.1));                  //后验错误估计协方差矩阵P
 
-//        for (int i = 0; i < A.rows; ++i) {
-//            for (int j = 0; j < A.cols; ++j) {
-//                std::cout<<A.at<float>(i,j)<<" ";
+//        for (int i = 0; i < P.rows; ++i) {
+//            for (int j = 0; j < P.cols; ++j) {
+//                std::cout<<P.at<float>(i,j)<<" ";
 //            }
 //            std::cout<<std::endl;
 //        }
