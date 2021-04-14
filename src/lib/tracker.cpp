@@ -27,6 +27,7 @@ void Tracker::new_track(track &tr) {
 //    if (trackIdNow==3)
 //    tr.trace.push_back(cv::Point3f (tr.p.x,tr.p.y,tr.p.z));
     tracks.insert(std::pair<int,track>(trackIdNow,tr));
+    track_filter.insert(std::pair<int,std::vector<Position>>(trackIdNow,{tr.p}));
     trackIdNow++;
 }
 void Tracker::trackinit(std::vector<Detection> &detections){
@@ -117,29 +118,42 @@ void Tracker::update(std::vector<Detection> &detections){
                     }else{
                         //由3D切换为2D
                         tracks.at(trackID).lost3D++;
-                        //中途丢失3D信息用预测信息补全
                     }
 
                 } else{
                     //具备直接的3D信息直接匹配
-                    tracks.at(trackID).lost3D=0;
-                    tracks.at(trackID).s    =   detections.at(det_idx).s;
-                    tracks.at(trackID).viz=detections.at(det_idx).viz;
-                    tracks.at(trackID).points=detections.at(det_idx).points;
-                    tracks.at(trackID).trace.push_back(cv::Point3f (tracks.at(trackID).p.x,tracks.at(trackID).p.y,tracks.at(trackID).p.z));
+//                        if (update_filter(trackID, detections.at(det_idx).p)== false){
+//                            tracks.at(trackID).lost3D++;
+//                            if (tracks.at(trackID).lost3D>death_period)
+//                                tracks.at(trackID).Information_3D= false;//误检过多转2D
+//                        }
+//                        else{
+                            tracks.at(trackID).lost3D=0;
+                            tracks.at(trackID).s    =   detections.at(det_idx).s;
+                            tracks.at(trackID).viz=detections.at(det_idx).viz;
+                            tracks.at(trackID).points=detections.at(det_idx).points;
+                            tracks.at(trackID).trace.push_back(cv::Point3f (tracks.at(trackID).p.x,tracks.at(trackID).p.y,tracks.at(trackID).p.z));
+//                        }
                 }
             } else{
                 if (detections.at(det_idx).Information_3D){//由2D切换为3D
-                    tracks.at(trackID).lost3D=0;
-                    tracks.at(trackID).s    =   detections.at(det_idx).s;
-                    tracks.at(trackID).p    =   detections.at(det_idx).p;
-                    tracks.at(trackID).viz=detections.at(det_idx).viz;
-                    tracks.at(trackID).points=detections.at(det_idx).points;
-                    tracks.at(trackID).trace.push_back(cv::Point3f (detections.at(det_idx).p.x,detections.at(det_idx).p.y,detections.at(det_idx).p.z));//轨迹起始点为检测道到的当前位置
-                    tracks.at(trackID).kf.Kalmaninitstate({detections.at(det_idx).p.x,detections.at(det_idx).p.y,detections.at(det_idx).p.z,(float )detections.at(det_idx).Bbox.x,(float )detections.at(det_idx).Bbox.y,(float )detections.at(det_idx).Bbox.width,(float )detections.at(det_idx).Bbox.height
-                                                                  ,0,0,0,tracks.at(trackID).ve.vx,tracks.at(trackID).ve.vy,tracks.at(trackID).ve.vz,tracks.at(trackID).ve.vz});
+//                    if (update_filter(trackID, detections.at(det_idx).p)== false){
+//                        tracks.at(trackID).lost3D++;
+//                        detections.at(det_idx).Information_3D= false;//不予更新3D
+//                    } else{
+//                        Velocity vinit={track_filter.at(trackID).at(2).x-track_filter.at(trackID).at(1).x,track_filter.at(trackID).at(2).y-track_filter.at(trackID).at(1).y,track_filter.at(trackID).at(2).z-track_filter.at(trackID).at(1).z};
+//                        std::cout<<"vint:x"<<vinit.vx<<std::endl;
+                        tracks.at(trackID).lost3D=0;
+                        tracks.at(trackID).s    =   detections.at(det_idx).s;
+                        tracks.at(trackID).p    =   detections.at(det_idx).p;
+                        tracks.at(trackID).v    = {0,0,0};
+                        tracks.at(trackID).viz=detections.at(det_idx).viz;
+                        tracks.at(trackID).points=detections.at(det_idx).points;
+                        tracks.at(trackID).trace.push_back(cv::Point3f (detections.at(det_idx).p.x,detections.at(det_idx).p.y,detections.at(det_idx).p.z));//轨迹起始点为检测道到的当前位置
+                        tracks.at(trackID).kf.Kalmaninitstate({detections.at(det_idx).p.x,detections.at(det_idx).p.y,detections.at(det_idx).p.z,(float )detections.at(det_idx).Bbox.x,(float )detections.at(det_idx).Bbox.y,(float )detections.at(det_idx).Bbox.width,(float )detections.at(det_idx).Bbox.height
+                                                                      ,0,0,0,tracks.at(trackID).ve.vx,tracks.at(trackID).ve.vy,tracks.at(trackID).ve.vz,tracks.at(trackID).ve.vz});
+//                    }
 //                    tracks.at(trackID).kf.Kalmanprediction();//重新初始化卡尔曼 加入3D的坐标
-//                    std::cout<<"restate"<<trackID<<":"<<pridict.at(0)<<" "<<pridict.at(1)<<" "<<pridict.at(2)<<std::endl;
                 }
             }
             //估计的位置输出
@@ -195,6 +209,8 @@ void Tracker::update(std::vector<Detection> &detections){
                     continue;
                 }
             }
+//            if (detections.at(det_idx).Information_3D&&tracks.at(trackID).lost3D>0)// lost3D 更新使用历史信息
+//                detections.at(det_idx).p={tracks.at(trackID).p.x,tracks.at(trackID).p.y,tracks.at(trackID).p.z};
             tracks.at(trackID).kf.kalmanUpdate(
                     {detections.at(det_idx).p.x, detections.at(det_idx).p.y, detections.at(det_idx).p.z,
                      (float )detections.at(det_idx).Bbox.x,(float )detections.at(det_idx).Bbox.y,(float )detections.at(det_idx).Bbox.width,(float )detections.at(det_idx).Bbox.height});
@@ -203,19 +219,24 @@ void Tracker::update(std::vector<Detection> &detections){
     }
 //    std::cout<<"track list over"<<std::endl;
 }
+//用于消除异常值
 bool  Tracker::update_filter(int id,Position & update){
-    auto trc=track_filter.at(id);
+    std::cout<<"update_f"<<std::endl;
     track_filter.at(id).push_back(update);
+    auto trc=track_filter.at(id);
     float d0,d1,d2,T=0.2;
     bool f0= false,f1= false,f2= false;
-    if (trc.size()<2)
+    if (trc.size()<3)
         {
             return false;
         } else{
-            d0= sqrt(pow((trc.at(1).x-trc.at(0).x),2)+ pow(trc.at(1).y-trc.at(0).y,2)+pow(trc.at(1).z-trc.at(0).z,2));
-            d1= sqrt(pow((trc.at(2).x-trc.at(1).x),2)+ pow(trc.at(2).y-trc.at(1).y,2)+pow(trc.at(2).z-trc.at(1).z,2));
-            d2= sqrt(pow((trc.at(2).x-trc.at(0).x),2)+ pow(trc.at(2).y-trc.at(0).y,2)+pow(trc.at(2).z-trc.at(0).z,2));
-        }
+            d0= sqrt((trc.at(1).x-trc.at(0).x)*(trc.at(1).x-trc.at(0).x)+ (trc.at(1).y-trc.at(0).y)*(trc.at(1).y-trc.at(0).y));
+            std::cout<<"d0"<<d0<<" ";
+            d1= sqrt((trc.at(2).x-trc.at(1).x)*(trc.at(2).x-trc.at(1).x)+ (trc.at(2).y-trc.at(1).y)*(trc.at(2).y-trc.at(1).y));
+            std::cout<<"d1"<<d1<<" ";
+            d2= sqrt((trc.at(2).x-trc.at(0).x)*(trc.at(2).x-trc.at(0).x)+ (trc.at(2).y-trc.at(0).y)*(trc.at(2).y-trc.at(0).y));
+            std::cout<<"d2"<<d2<<" ";
+    }
     if (d1>T&&d2>T) f2= false;
     if (d0>T&&d2>T) f0= false;
     if (d0>T&&d1>T) f1= false;
@@ -224,8 +245,9 @@ bool  Tracker::update_filter(int id,Position & update){
         track_filter.at(id).at(1)={(trc.at(0).x+trc.at(2).x)/2,(trc.at(0).y+trc.at(2).y)/2,(trc.at(0).z+trc.at(2).z)/2};
     }
     if (!f2){
-        update={2*trc.at(1).x-trc.at(0).x,2*trc.at(1).y-trc.at(0).y,2*trc.at(1).z-trc.at(0).z};
-        track_filter.at(id).at(2)=update;
+        track_filter.at(id).at(2)={2*trc.at(1).x-trc.at(0).x,2*trc.at(1).y-trc.at(0).y,2*trc.at(1).z-trc.at(0).z};
+//        update=track_filter.at(id).at(2);
+        std::cout<<"update"<<track_filter.at(id).at(2).x<<" "<<track_filter.at(id).at(2).y<<" "<<track_filter.at(id).at(2).z<<std::endl;
     }
     track_filter.at(id).erase(track_filter.at(id).begin());
     return true;
@@ -233,6 +255,7 @@ bool  Tracker::update_filter(int id,Position & update){
 
 void Tracker::remove_track(int trackId){
     tracks.erase(trackId);
+    track_filter.erase(trackId);
 }
 std::vector<Track_report> Tracker::report_tracks(){
     std::vector<Track_report> reports;
