@@ -55,7 +55,7 @@ private:
         long long int temp=(long long int)poseStamped->header.stamp.sec*1000;
 //        std::cout<<"temp1:"<<temp<<std::endl;
        msecs=temp+poseStamped->header.stamp.nanosec-clock.now().nanoseconds()/1000000;
-        RCLCPP_INFO(this->get_logger(),"time_gap_ses="+std::to_string(msecs));
+//        RCLCPP_INFO(this->get_logger(),"time_gap_ses="+std::to_string(msecs));
         auto pose= poseStamped->pose;
 //        std::cout<<"Pose_callback"<<std::endl;
         Eigen::Vector3f  ea(std::atan2(pose.orientation.y,pose.orientation.x),0.0,0.0);

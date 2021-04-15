@@ -17,6 +17,7 @@ float Matcher3D::Iou_caculate3D(std::array<float,StateNum> t,Detection d) {
 }
 std::vector<std::vector<float>> Matcher3D::Iou_cost_3D(std::map <int,std::array<float,StateNum>> t_boxes, std::vector <Detection> det_boxes, float max_iou_distance) {
     int row=0;
+    Cost.clear();
     for(auto iter=t_boxes.begin(); iter!=t_boxes.end(); iter++){
         Cost.emplace_back(std::vector<float>());
         for(int col = 0; col < det_boxes.size(); col++){
@@ -48,8 +49,10 @@ float Matcher3D::Iou_caculate2D(std::array<float, StateNum> t, Detection d,bool 
         return Iou;
     }
 }
+
 std::vector<std::vector<float>> Matcher3D::Iou_cost_2D(std::map<int, std::array<float, 14>> t_boxes,std::vector<Detection> det_boxes,std::map<int,track> tracks) {
     int row=0;
+    Cost.clear();
     for(auto iter=t_boxes.begin(); iter!=t_boxes.end(); iter++){
         Cost.emplace_back(std::vector<float>());
         for(int col = 0; col < det_boxes.size(); col++){
@@ -61,6 +64,7 @@ std::vector<std::vector<float>> Matcher3D::Iou_cost_2D(std::map<int, std::array<
     }
     return Cost;
 }
+
 void Matcher3D::Matching(std::vector<int> &assignments) {
     HungarianAlgorithm HungAlgo;
     HungAlgo.Solve(Cost, assignments);

@@ -15,6 +15,7 @@
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "geometry_msgs/msg/vector3.hpp"
 #include "std_msgs/msg/byte_multi_array.hpp"
+#include "sensor_msgs/msg/image.hpp"
 #include "std_msgs/msg/int32.hpp"
 #include "pcl/point_cloud.h"
 #include "pcl_conversions/pcl_conversions.h"
@@ -24,12 +25,15 @@
 #include<arpa/inet.h>
 #include<unistd.h>
 #include "proto/track_frame.pb.h"
+#include "cv_bridge/cv_bridge.h"
+
 using namespace std::chrono_literals;
 int socket_fd,fd;
 class SocketNode : public rclcpp::Node{
 private:
-    rclcpp::TimerBase::SharedPtr timer_1,timer_2,timer_3;
+    rclcpp::TimerBase::SharedPtr timer_1,timer_2;
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr publisher_rgbd;
+    rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr publisher_rgbd_img;
     rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_socket;
     rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr sub_frame;
     rclcpp::Clock clock;
@@ -75,6 +79,7 @@ private:
 //                RCLCPP_INFO(this->get_logger(),"mid_data:"+std::to_string(depth_mat.at<uint16_t>(60,106)));
             data_flag= true;
             send_message();
+//            send_rgbd();
 //                processRGBD(copy_data,depth_mat);//解析为深度图
 //                send_message();
 //                cout<<"time-remat= "<<(float)(time_b-time_f)/CLOCKS_PER_SEC*1000<<endl;
@@ -85,37 +90,27 @@ private:
 //                publisher_socket->publish(socket_msg);
         }
     }
-//    void send_track(){
-//        if (track_flag== false)
-//        {
-//            RCLCPP_INFO(this->get_logger(),"-----No track!---------");
-//            return;
-//        }
-//        else{
-//            track_flag= false;
-//            RCLCPP_INFO(this->get_logger(),"-----send_frame---------");
-//        }
-//        RCLCPP_INFO(this->get_logger(),"nums of person:"+std::to_string(track_frame.person_size()));
-////        std::cout<<"nums of person:"<<track_frame.person_size()<<std::endl;
-//        for(auto p:track_frame.person()){
-//            RCLCPP_INFO(this->get_logger(),"Person---px:"+std::to_string(p.px())+",py"+std::to_string(p.py())+",sx"+std::to_string(p.sx())+",sy"+std::to_string(p.sy())+",vx"+std::to_string(p.vx())+",vy"+std::to_string(p.vy()));
-////            std::cout<<"Person_v="<<p.vx()<<":"<<p.vy()<<std::endl;
-//        }
-//        std::string data;
-//        track_frame.SerializeToString(&data);
-////        char bts[data.length()];
-////        sprintf(bts, "%s", data.c_str());
-////        char* array = new char[size_array];
-////        track_frame.SerializeToArray(array, size_array);
-//        auto size=send(fd, data.c_str(),data.length(), 0);
-////        RCLCPP_INFO(this->get_logger(),"size of senddata:"+std::to_string(size));
-//    }
-    void send_message(){
+
+    void send_rgbd(){
         if (data_flag== false)
             return;
         else
             data_flag= false;
-//        RCLCPP_INFO(this->get_logger(),"---send_pointcloud---");
+
+        sensor_msgs::msg::Image img_rgbd;
+        img_rgbd.header.stamp=header_points.stamp;
+        img_rgbd.header.frame_id="map";
+        cv_bridge::CvImage( img_rgbd.header,"mono16",depth_mat).toImageMsg(img_rgbd);
+        publisher_rgbd_img->publish(img_rgbd);
+    }
+    void send_message(){
+        RCLCPP_INFO(this->get_logger(),"send call back");
+        if (data_flag== false)
+        {
+            return;
+        }
+        else
+            data_flag= false;
         auto time_f=std::clock();
         double t1 = (double)cv::getTickCount();
         cv::Mat masku(depth_mat.size(), CV_8UC1, cv::Scalar(0));//腐蚀
@@ -133,13 +128,10 @@ private:
             }
         }
         RCLCPP_INFO(this->get_logger(),"Points size:"+std::to_string(pointcloud->points.size()));
-//        std::cout<<"Points_nums:"<<pointcloud->points.size()<<"Sample_data"<<pointcloud->points.at(pointcloud->points.size()/2)<<std::endl;
         sensor_msgs::msg::PointCloud2 msg;
         pcl::toROSMsg(*pointcloud,msg);
         msg.header.frame_id="map";
         msg.header.stamp=header_points.stamp;
-//        std::cout<<"sec:"<<msg.header.stamp.sec<<std::endl;
-//        std::cout<<"nanosec:"<<msg.header.stamp.nanosec<<std::endl;
         publisher_rgbd->publish(msg);
         auto time_b=std::clock();
         double t2 = (double)cv::getTickCount();
@@ -147,33 +139,6 @@ private:
         t = t*1000.0 / cv::getTickFrequency();
         RCLCPP_INFO(this->get_logger(),"Time of remat:sys_get:"+std::to_string((float)(time_b-time_f)/CLOCKS_PER_SEC*1000)+"cv:"+std::to_string(t));
     }
-//    void processRGBD(const unsigned char* address,cv::Mat &dmat) {
-//        if (address == nullptr) return;
-//        std::shared_ptr<costmap::RGBD_INFO> rgbd_info = std::make_shared<costmap::RGBD_INFO>();
-//        rgbd_info->timestamp.secs = *((uint32_t*)address);
-//        rgbd_info->timestamp.nsecs = *(((uint32_t*)address) + 1);
-//        rgbd_info->scale_ = *((float*)address+2);
-//        rgbd_info->width_ = *((uint32_t*)address+3);
-//        rgbd_info->height_ = *((uint32_t*)address+4);
-////        std::cout<<"Width:"<<rgbd_info->width_<<"Height:"<<rgbd_info->height_<<std::endl;
-//        rgbd_info->ppx_ = *((float*)address+5);
-//        rgbd_info->ppy_ = *((float*)address+6);
-//        rgbd_info->fx_ = *((float*)address+7);
-//        rgbd_info->fy_ = *((float*)address+8);
-//        rgbd_info->model_ = *((uint32_t*)address+9);
-//        rgbd_info->coeffs_[0] = *((float*)address+10);
-//        rgbd_info->coeffs_[1] = *((float*)address+11);
-//        rgbd_info->coeffs_[2] = *((float*)address+12);
-//        rgbd_info->coeffs_[3] = *((float*)address+13);
-//        rgbd_info->coeffs_[4] = *((float*)address+14);
-//        uint32_t serial_num_size = *((uint32_t*)address+15);
-//        std::string serial_num((char*)((uint32_t*)address+16),serial_num_size);
-//        rgbd_info->serial_num_ = serial_num;
-//        char* depth_data = (char*)((uint32_t*)address + 16) + serial_num_size;
-//        dmat = cv::Mat(cv::Size(rgbd_info->width_, rgbd_info->height_), CV_16UC1, (short*)depth_data);
-//        U_in={rgbd_info->fx_,rgbd_info->fy_,rgbd_info->ppx_,rgbd_info->ppy_};
-//        std::cout<<U_in<<std::endl;
-//    }
     void topic_callback_frame(geometry_msgs::msg::PoseArray::SharedPtr msg){
 //        std::cout<<"send_frame"<<std::endl;
         long long time_frame;
@@ -219,6 +184,7 @@ public:
     {
         publisher_rgbd = this->create_publisher<sensor_msgs::msg::PointCloud2>("/pointscloud_rgbd", 1);
         publisher_socket = this->create_publisher<std_msgs::msg::Int32>("/socket_fd", 1);
+        publisher_rgbd_img = this->create_publisher<sensor_msgs::msg::Image>("rgbd_img",1);
         timer_1 = this->create_wall_timer(20ms, std::bind(&SocketNode::timer_callback, this));
 //        timer_2 = this->create_wall_timer(10ms, std::bind(&SocketNode::send_message, this));
 //        timer_3 = this->create_wall_timer(10ms, std::bind(&SocketNode::send_track, this));

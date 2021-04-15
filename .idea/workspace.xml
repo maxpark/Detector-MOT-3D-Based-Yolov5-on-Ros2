@@ -34,7 +34,13 @@
   <component name="ChangeListManager">
     <list default="true" id="fdbe3dc6-6f4b-4416-89ce-0b2e9f688818" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/tracker.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/tracker.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/matcher/Iou_matching.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/matcher/Iou_matching.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/matcher/matcher.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/matcher/matcher.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/detectnode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/detectnode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Iou_matching.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Iou_matching.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/socketnode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/socketnode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tracknode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tracknode.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,12 +68,13 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
     <property name="ctest.advertisement.all.test.configuration.is.created" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../CLionProjects/work/sample" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager" selected="CMake Application.detect_mot_tracknode">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="detect_mot" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="detect_mot" TARGET_NAME="detect_mot" CONFIG_NAME="Debug">
@@ -186,11 +193,6 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="CMake Application.detect_mot" />
       <item itemvalue="CMake Application.detect_mot__cpp" />
@@ -225,7 +227,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1618291366179</updated>
-      <workItem from="1618291369741" duration="30017000" />
+      <workItem from="1618291369741" duration="30274000" />
+      <workItem from="1618378632141" duration="214000" />
+      <workItem from="1618386629532" duration="17406000" />
     </task>
     <servers />
   </component>
@@ -242,5 +246,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

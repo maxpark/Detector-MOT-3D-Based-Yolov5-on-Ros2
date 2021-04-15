@@ -18,7 +18,10 @@ int biasx,biasy;
 public:
     void GetValidArea();//获取有效区域
     Matcher(std::map<int,Oneclass> &Clu,std::vector<Object> &obj);
+    Matcher(std::vector<Object> &obj);
     std::map<std::array<int,2>,float> BoxIouMatch();
+    std::vector<std::vector<float>> Euler_cost(std::map<int,std::array<float,StateNum>> t_boxes,std::vector<Detection> det_boxes);
+
 };
 
 
