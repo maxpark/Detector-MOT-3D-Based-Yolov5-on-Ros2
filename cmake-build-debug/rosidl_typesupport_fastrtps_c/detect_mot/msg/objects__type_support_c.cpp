@@ -35,7 +35,7 @@ extern "C"
 #endif
 
 #include "detect_mot/msg/detection2d__functions.h"  // objects_back, objects_front
-#include "std_msgs/msg/header__functions.h"  // header
+#include "std_msgs/msg/header__functions.h"  // back_header, front_header
 
 // forward declare type support functions
 size_t get_serialized_size_detect_mot__msg__Detection2d(
@@ -74,14 +74,27 @@ static bool _Objects__cdr_serialize(
     return false;
   }
   const _Objects__ros_msg_type * ros_message = static_cast<const _Objects__ros_msg_type *>(untyped_ros_message);
-  // Field name: header
+  // Field name: front_header
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_fastrtps_c, std_msgs, msg, Header
       )()->data);
     if (!callbacks->cdr_serialize(
-        &ros_message->header, cdr))
+        &ros_message->front_header, cdr))
+    {
+      return false;
+    }
+  }
+
+  // Field name: back_header
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_fastrtps_c, std_msgs, msg, Header
+      )()->data);
+    if (!callbacks->cdr_serialize(
+        &ros_message->back_header, cdr))
     {
       return false;
     }
@@ -135,14 +148,27 @@ static bool _Objects__cdr_deserialize(
     return false;
   }
   _Objects__ros_msg_type * ros_message = static_cast<_Objects__ros_msg_type *>(untyped_ros_message);
-  // Field name: header
+  // Field name: front_header
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_fastrtps_c, std_msgs, msg, Header
       )()->data);
     if (!callbacks->cdr_deserialize(
-        cdr, &ros_message->header))
+        cdr, &ros_message->front_header))
+    {
+      return false;
+    }
+  }
+
+  // Field name: back_header
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_fastrtps_c, std_msgs, msg, Header
+      )()->data);
+    if (!callbacks->cdr_deserialize(
+        cdr, &ros_message->back_header))
     {
       return false;
     }
@@ -215,10 +241,14 @@ size_t get_serialized_size_detect_mot__msg__Objects(
   (void)padding;
   (void)wchar_size;
 
-  // field.name header
+  // field.name front_header
 
   current_alignment += get_serialized_size_std_msgs__msg__Header(
-    &(ros_message->header), current_alignment);
+    &(ros_message->front_header), current_alignment);
+  // field.name back_header
+
+  current_alignment += get_serialized_size_std_msgs__msg__Header(
+    &(ros_message->back_header), current_alignment);
   // field.name objects_front
   {
     size_t array_size = ros_message->objects_front.size;
@@ -267,7 +297,18 @@ size_t max_serialized_size_detect_mot__msg__Objects(
   (void)wchar_size;
   (void)full_bounded;
 
-  // member: header
+  // member: front_header
+  {
+    size_t array_size = 1;
+
+
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment +=
+        max_serialized_size_std_msgs__msg__Header(
+        full_bounded, current_alignment);
+    }
+  }
+  // member: back_header
   {
     size_t array_size = 1;
 

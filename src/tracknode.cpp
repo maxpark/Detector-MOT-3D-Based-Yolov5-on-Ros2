@@ -136,14 +136,14 @@ void time_callback(){
                     H.at<float>(i,j)=1.0;
             }
         }
-        setIdentity(Q, cv::Scalar::all(1e-4));            //系统噪声方差矩阵Q
-        setIdentity(R, cv::Scalar::all(1e-3));        //测量噪声方差矩阵R
+        setIdentity(Q, cv::Scalar::all(1e-3));            //系统噪声方差矩阵Q
+        setIdentity(R, cv::Scalar::all(1e-2));        //测量噪声方差矩阵R
         setIdentity(P, cv::Scalar::all(.1));                  //后验错误估计协方差矩阵P
         for (int i = 0; i < Q.rows; ++i) {
             for (int j = 0; j < Q.cols; ++j) {
                 if (i==j){
                     if (i>=StateNum/2&&i<=StateNum-3)
-                    Q.at<float>(i,j)=0.1;
+                    Q.at<float>(i,j)=0.01;
                 }
             }
         }
@@ -152,7 +152,7 @@ void time_callback(){
             for (int j = 0; j < P.cols; ++j) {
                 if (i==j){
                     if (i>=StateNum/2&&i<=StateNum-3)
-                        P.at<float>(i,j)=1;
+                        P.at<float>(i,j)=0.1;
                 }
             }
         }
@@ -176,7 +176,7 @@ public:
     TrackNode() : Node("track"){
         set_kalman_matrix(A,H,P,Q,R);
         tracker_f=Tracker(A,H,P,Q,R,0.9,2,2);
-        publisher_frame = this->create_publisher<geometry_msgs::msg::PoseArray>("/ph/core/track", 1);
+        publisher_frame = this->create_publisher<geometry_msgs::msg::PoseArray>("/track", 1);
         subscription_objects=this->create_subscription<detect_mot::msg::Frame>("/objects",1,std::bind((&TrackNode::topic_callback_objects),this,std::placeholders::_1));
 //        timer_publish=this->create_wall_timer(50ms,std::bind(&TrackNode::time_callback,this));
     }

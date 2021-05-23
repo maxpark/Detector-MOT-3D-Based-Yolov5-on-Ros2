@@ -168,7 +168,10 @@ namespace detect_mot {
                 }
 
                 std_msgs::msg::dds_::Header_PluginSupport_print_data(
-                    (const std_msgs::msg::dds_::Header_*) &sample->header_, "header_", indent_level + 1);
+                    (const std_msgs::msg::dds_::Header_*) &sample->front_header_, "front_header_", indent_level + 1);
+
+                std_msgs::msg::dds_::Header_PluginSupport_print_data(
+                    (const std_msgs::msg::dds_::Header_*) &sample->back_header_, "back_header_", indent_level + 1);
 
                 if (detect_mot::msg::dds_::Detection2d_Seq_get_contiguous_bufferI(&sample->objects_front_) != NULL) {
                     RTICdrType_printArray(
@@ -350,7 +353,17 @@ namespace detect_mot {
 
                     if(!std_msgs::msg::dds_::Header_Plugin_serialize(
                         endpoint_data,
-                        (const std_msgs::msg::dds_::Header_*) &sample->header_,
+                        (const std_msgs::msg::dds_::Header_*) &sample->front_header_,
+                        stream,
+                        RTI_FALSE, encapsulation_id,
+                        RTI_TRUE,
+                        endpoint_plugin_qos)) {
+                        return RTI_FALSE;
+                    }
+
+                    if(!std_msgs::msg::dds_::Header_Plugin_serialize(
+                        endpoint_data,
+                        (const std_msgs::msg::dds_::Header_*) &sample->back_header_,
                         stream,
                         RTI_FALSE, encapsulation_id,
                         RTI_TRUE,
@@ -449,7 +462,15 @@ namespace detect_mot {
 
                         if(!std_msgs::msg::dds_::Header_Plugin_deserialize_sample(
                             endpoint_data,
-                            &sample->header_,
+                            &sample->front_header_,
+                            stream,
+                            RTI_FALSE, RTI_TRUE,
+                            endpoint_plugin_qos)) {
+                            goto fin; 
+                        }
+                        if(!std_msgs::msg::dds_::Header_Plugin_deserialize_sample(
+                            endpoint_data,
+                            &sample->back_header_,
                             stream,
                             RTI_FALSE, RTI_TRUE,
                             endpoint_plugin_qos)) {
@@ -769,6 +790,13 @@ namespace detect_mot {
                         endpoint_plugin_qos)) {
                         goto fin; 
                     }
+                    if (!std_msgs::msg::dds_::Header_Plugin_skip(
+                        endpoint_data,
+                        stream, 
+                        RTI_FALSE, RTI_TRUE, 
+                        endpoint_plugin_qos)) {
+                        goto fin; 
+                    }
                     {
                         RTICdrUnsignedLong sequence_length;
                         if (!RTICdrStream_skipNonPrimitiveSequence(
@@ -878,6 +906,8 @@ namespace detect_mot {
 
                 current_alignment +=std_msgs::msg::dds_::Header_Plugin_get_serialized_sample_min_size(
                     endpoint_data,RTI_FALSE,encapsulation_id,current_alignment);
+                current_alignment +=std_msgs::msg::dds_::Header_Plugin_get_serialized_sample_min_size(
+                    endpoint_data,RTI_FALSE,encapsulation_id,current_alignment);
                 current_alignment +=RTICdrType_getNonPrimitiveSequenceMaxSizeSerialized(
                     current_alignment, 0,
                     detect_mot::msg::dds_::Detection2d_Plugin_get_serialized_sample_min_size,
@@ -939,7 +969,11 @@ namespace detect_mot {
 
                 current_alignment += std_msgs::msg::dds_::Header_Plugin_get_serialized_sample_size(
                     endpoint_data,RTI_FALSE, encapsulation_id,
-                    current_alignment, (const std_msgs::msg::dds_::Header_*) &sample->header_);
+                    current_alignment, (const std_msgs::msg::dds_::Header_*) &sample->front_header_);
+
+                current_alignment += std_msgs::msg::dds_::Header_Plugin_get_serialized_sample_size(
+                    endpoint_data,RTI_FALSE, encapsulation_id,
+                    current_alignment, (const std_msgs::msg::dds_::Header_*) &sample->back_header_);
 
                 current_alignment += RTICdrType_get4ByteMaxSizeSerialized(
                     PRESTypePluginDefaultEndpointData_getAlignment(

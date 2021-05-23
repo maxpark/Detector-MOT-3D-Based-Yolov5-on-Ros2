@@ -45,11 +45,11 @@ namespace detect_mot {
 
                 static DDS_TypeCode Objects__g_tc_objects_front__sequence = DDS_INITIALIZE_SEQUENCE_TYPECODE(RTI_INT32_MAX,NULL);
                 static DDS_TypeCode Objects__g_tc_objects_back__sequence = DDS_INITIALIZE_SEQUENCE_TYPECODE(RTI_INT32_MAX,NULL);
-                static DDS_TypeCode_Member Objects__g_tc_members[3]=
+                static DDS_TypeCode_Member Objects__g_tc_members[4]=
                 {
 
                     {
-                        (char *)"header_",/* Member name */
+                        (char *)"front_header_",/* Member name */
                         {
                             0,/* Representation ID */          
                             DDS_BOOLEAN_FALSE,/* Is a pointer? */
@@ -66,7 +66,7 @@ namespace detect_mot {
                         NULL/* Ignored */
                     }, 
                     {
-                        (char *)"objects_front_",/* Member name */
+                        (char *)"back_header_",/* Member name */
                         {
                             1,/* Representation ID */          
                             DDS_BOOLEAN_FALSE,/* Is a pointer? */
@@ -83,9 +83,26 @@ namespace detect_mot {
                         NULL/* Ignored */
                     }, 
                     {
-                        (char *)"objects_back_",/* Member name */
+                        (char *)"objects_front_",/* Member name */
                         {
                             2,/* Representation ID */          
+                            DDS_BOOLEAN_FALSE,/* Is a pointer? */
+                            -1, /* Bitfield bits */
+                            NULL/* Member type code is assigned later */
+                        },
+                        0, /* Ignored */
+                        0, /* Ignored */
+                        0, /* Ignored */
+                        NULL, /* Ignored */
+                        RTI_CDR_REQUIRED_MEMBER, /* Is a key? */
+                        DDS_PUBLIC_MEMBER,/* Member visibility */
+                        1,
+                        NULL/* Ignored */
+                    }, 
+                    {
+                        (char *)"objects_back_",/* Member name */
+                        {
+                            3,/* Representation ID */          
                             DDS_BOOLEAN_FALSE,/* Is a pointer? */
                             -1, /* Bitfield bits */
                             NULL/* Member type code is assigned later */
@@ -111,7 +128,7 @@ namespace detect_mot {
                         0, /* Ignored */
                         0, /* Ignored */
                         NULL, /* Ignored */
-                        3, /* Number of members */
+                        4, /* Number of members */
                         Objects__g_tc_members, /* Members */
                         DDS_VM_NONE  /* Ignored */         
                     }}; /* Type code for Objects_*/
@@ -126,8 +143,10 @@ namespace detect_mot {
 
                 Objects__g_tc_members[0]._representation._typeCode = (RTICdrTypeCode *)std_msgs::msg::dds_::Header__get_typecode();
 
-                Objects__g_tc_members[1]._representation._typeCode = (RTICdrTypeCode *)& Objects__g_tc_objects_front__sequence;
-                Objects__g_tc_members[2]._representation._typeCode = (RTICdrTypeCode *)& Objects__g_tc_objects_back__sequence;
+                Objects__g_tc_members[1]._representation._typeCode = (RTICdrTypeCode *)std_msgs::msg::dds_::Header__get_typecode();
+
+                Objects__g_tc_members[2]._representation._typeCode = (RTICdrTypeCode *)& Objects__g_tc_objects_front__sequence;
+                Objects__g_tc_members[3]._representation._typeCode = (RTICdrTypeCode *)& Objects__g_tc_objects_back__sequence;
 
                 is_initialized = RTI_TRUE;
 
@@ -168,7 +187,11 @@ namespace detect_mot {
                     return RTI_FALSE;
                 }
 
-                if (!std_msgs::msg::dds_::Header__initialize_w_params(&sample->header_,
+                if (!std_msgs::msg::dds_::Header__initialize_w_params(&sample->front_header_,
+                allocParams)) {
+                    return RTI_FALSE;
+                }
+                if (!std_msgs::msg::dds_::Header__initialize_w_params(&sample->back_header_,
                 allocParams)) {
                     return RTI_FALSE;
                 }
@@ -230,7 +253,9 @@ namespace detect_mot {
                     return;
                 }
 
-                std_msgs::msg::dds_::Header__finalize_w_params(&sample->header_,deallocParams);
+                std_msgs::msg::dds_::Header__finalize_w_params(&sample->front_header_,deallocParams);
+
+                std_msgs::msg::dds_::Header__finalize_w_params(&sample->back_header_,deallocParams);
 
                 detect_mot::msg::dds_::Detection2d_Seq_set_element_deallocation_params(
                     &sample->objects_front_,deallocParams);
@@ -258,7 +283,8 @@ namespace detect_mot {
                 deallocParamsTmp.delete_pointers = (DDS_Boolean)deletePointers;
                 deallocParamsTmp.delete_optional_members = DDS_BOOLEAN_TRUE;
 
-                std_msgs::msg::dds_::Header__finalize_optional_members(&sample->header_, deallocParams->delete_pointers);
+                std_msgs::msg::dds_::Header__finalize_optional_members(&sample->front_header_, deallocParams->delete_pointers);
+                std_msgs::msg::dds_::Header__finalize_optional_members(&sample->back_header_, deallocParams->delete_pointers);
                 {
                     DDS_UnsignedLong i, length;
                     length = detect_mot::msg::dds_::Detection2d_Seq_get_length(
@@ -296,7 +322,11 @@ namespace detect_mot {
                     }
 
                     if (!std_msgs::msg::dds_::Header__copy(
-                        &dst->header_,(const std_msgs::msg::dds_::Header_*)&src->header_)) {
+                        &dst->front_header_,(const std_msgs::msg::dds_::Header_*)&src->front_header_)) {
+                        return RTI_FALSE;
+                    } 
+                    if (!std_msgs::msg::dds_::Header__copy(
+                        &dst->back_header_,(const std_msgs::msg::dds_::Header_*)&src->back_header_)) {
                         return RTI_FALSE;
                     } 
                     if (!detect_mot::msg::dds_::Detection2d_Seq_copy(&dst->objects_front_ ,

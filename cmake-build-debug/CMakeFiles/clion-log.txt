@@ -32,6 +32,10 @@ CMake Deprecation Warning at /home/mzc/code/ROS/dev_ws/src/detect_mot/cmake-buil
 -- Found std_msgs: 0.7.0 (/opt/ros/dashing/share/std_msgs/cmake)
 -- Found geometry_msgs: 0.7.0 (/opt/ros/dashing/share/geometry_msgs/cmake)
 -- Found nav_msgs: 0.7.0 (/opt/ros/dashing/share/nav_msgs/cmake)
+-- Found laser_geometry: 2.0.0 (/opt/ros/dashing/share/laser_geometry/cmake)
+-- append /usr/include/eigen3 to ()
+-- laser_geometry_INCLUDE_DIRS=/usr/include/eigen3
+-- Found tf2: 0.11.6 (/opt/ros/dashing/share/tf2/cmake)
 -- Found cv_bridge: 2.1.4 (/opt/ros/dashing/share/cv_bridge/cmake)
 -- Found sensor_msgs: 0.7.0 (/opt/ros/dashing/share/sensor_msgs/cmake)
 -- Found PythonInterp: /usr/bin/python3 (found version "3.6.9") 
@@ -54,7 +58,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:153 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:638 (find_eigen)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:850 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
@@ -66,7 +70,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:235 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:644 (find_openni)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
@@ -78,7 +82,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:280 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:646 (find_openni2)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
@@ -90,7 +94,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:312 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:648 (find_ensenso)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Could NOT find ensenso (missing: ENSENSO_LIBRARY ENSENSO_INCLUDE_DIR) 
@@ -104,7 +108,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:346 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:650 (find_davidSDK)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Could NOT find DAVIDSDK (missing: DAVIDSDK_LIBRARY DAVIDSDK_INCLUDE_DIR) 
@@ -118,7 +122,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:388 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:652 (find_dssdk)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Could NOT find DSSDK (missing: _DSSDK_LIBRARIES) 
@@ -152,7 +156,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:515 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:658 (find_libusb)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 ** WARNING ** io features related to libusb-1.0 will be disabled
@@ -165,7 +169,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:473 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:640 (find_flann)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:850 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
@@ -177,7 +181,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:473 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:640 (find_flann)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:850 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
@@ -189,7 +193,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:235 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:644 (find_openni)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
@@ -201,7 +205,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:280 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:646 (find_openni2)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
@@ -213,7 +217,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:312 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:648 (find_ensenso)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Could NOT find ensenso (missing: ENSENSO_LIBRARY ENSENSO_INCLUDE_DIR) 
@@ -227,7 +231,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:346 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:650 (find_davidSDK)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Could NOT find DAVIDSDK (missing: DAVIDSDK_LIBRARY DAVIDSDK_INCLUDE_DIR) 
@@ -241,7 +245,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:388 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:652 (find_dssdk)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Could NOT find DSSDK (missing: _DSSDK_LIBRARIES) 
@@ -255,7 +259,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:432 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:654 (find_rssdk)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Could NOT find RSSDK (missing: _RSSDK_LIBRARIES) 
@@ -269,7 +273,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:185 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:642 (find_qhull)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/211.6693.114/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
@@ -281,7 +285,7 @@ Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:235 (find_package_handle_standard_args)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:644 (find_openni)
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:847 (find_external_library)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_COMMON
@@ -292,7 +296,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_OCTREE
@@ -303,7 +307,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_IO
@@ -314,7 +318,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_KDTREE
@@ -325,7 +329,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_SEARCH
@@ -336,7 +340,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_SAMPLE_CONSENSUS
@@ -348,7 +352,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_FILTERS
@@ -359,7 +363,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_2D
@@ -370,7 +374,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:914 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_GEOMETRY
@@ -381,7 +385,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:914 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_FEATURES
@@ -392,7 +396,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_ML
@@ -403,7 +407,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_SEGMENTATION
@@ -414,7 +418,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   result variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_VISUALIZATION
@@ -425,7 +429,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   result variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_SURFACE
@@ -436,7 +440,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_REGISTRATION
@@ -447,7 +451,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   result variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_KEYPOINTS
@@ -458,7 +462,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_TRACKING
@@ -469,7 +473,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_RECOGNITION
@@ -480,7 +484,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   result variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_STEREO
@@ -491,7 +495,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_APPS
@@ -502,7 +506,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_IN_HAND_SCANNER
@@ -513,7 +517,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   result variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:914 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_MODELER
@@ -524,7 +528,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:914 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_POINT_CLOUD_EDITOR
@@ -536,7 +540,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:914 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_OUTOFCORE
@@ -547,7 +551,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   variables (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- looking for PCL_PEOPLE
@@ -558,7 +562,7 @@ CMake Warning (dev) at /home/mzc/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/
   (e.g., `_FOUND`) to follow a certain pattern.
 Call Stack (most recent call first):
   /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:911 (find_package_handle_standard_args)
-  CMakeLists.txt:58 (find_package)
+  CMakeLists.txt:60 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 ---protobuf_include----

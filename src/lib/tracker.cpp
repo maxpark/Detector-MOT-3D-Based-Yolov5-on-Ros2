@@ -45,7 +45,7 @@ void Tracker::trackinit(std::vector<Detection> &detections){
 void Tracker::predict(float dt) {
     kalman_output.clear();
     for (auto track:tracks) {
-        track.second.kf.KalmanSetTransitionMatrix(dt);
+//        track.second.kf.KalmanSetTransitionMatrix(dt);
         auto predict=track.second.kf.Kalmanprediction();
 //        if (track.second.enable)
         kalman_output.insert(std::pair<int,std::array<float,StateNum>>(track.first,predict));

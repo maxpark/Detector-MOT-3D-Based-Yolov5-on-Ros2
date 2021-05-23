@@ -42,6 +42,7 @@ public:
     DBSCAN();
     DBSCAN(Eigen::Vector4d intrinsics,Eigen::Isometry3d T_rc);
     void DBSCAN_Cluster(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud,cv::Size size);
+    void DBSCAN_lidar_Cluster(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud,cv::Size size);
     std::map<int,Oneclass> ReportClusteredResults();
     pcl::PointCloud<pcl::PointXYZI>::Ptr returnOriginpcl();
     pcl::PointCloud<pcl::PointXYZI>::Ptr returnClusterpcl();

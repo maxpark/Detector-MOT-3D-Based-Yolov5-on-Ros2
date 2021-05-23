@@ -2275,6 +2275,42 @@ src/lib/matcher.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/matcher.cpp.s
 .PHONY : src/lib/matcher.cpp.s
 
+src/lib/matcher2.o: src/lib/matcher2.cpp.o
+
+.PHONY : src/lib/matcher2.o
+
+# target to build an object file
+src/lib/matcher2.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_yolonode.dir/build.make CMakeFiles/detect_mot_yolonode.dir/src/lib/matcher2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_socketnode.dir/build.make CMakeFiles/detect_mot_socketnode.dir/src/lib/matcher2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_tracknode.dir/build.make CMakeFiles/detect_mot_tracknode.dir/src/lib/matcher2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/matcher2.cpp.o
+.PHONY : src/lib/matcher2.cpp.o
+
+src/lib/matcher2.i: src/lib/matcher2.cpp.i
+
+.PHONY : src/lib/matcher2.i
+
+# target to preprocess a source file
+src/lib/matcher2.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_yolonode.dir/build.make CMakeFiles/detect_mot_yolonode.dir/src/lib/matcher2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_socketnode.dir/build.make CMakeFiles/detect_mot_socketnode.dir/src/lib/matcher2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_tracknode.dir/build.make CMakeFiles/detect_mot_tracknode.dir/src/lib/matcher2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/matcher2.cpp.i
+.PHONY : src/lib/matcher2.cpp.i
+
+src/lib/matcher2.s: src/lib/matcher2.cpp.s
+
+.PHONY : src/lib/matcher2.s
+
+# target to generate assembly for a file
+src/lib/matcher2.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_yolonode.dir/build.make CMakeFiles/detect_mot_yolonode.dir/src/lib/matcher2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_socketnode.dir/build.make CMakeFiles/detect_mot_socketnode.dir/src/lib/matcher2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_tracknode.dir/build.make CMakeFiles/detect_mot_tracknode.dir/src/lib/matcher2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/matcher2.cpp.s
+.PHONY : src/lib/matcher2.cpp.s
+
 src/lib/tools.o: src/lib/tools.cpp.o
 
 .PHONY : src/lib/tools.o
@@ -2311,41 +2347,41 @@ src/lib/tools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/tools.cpp.s
 .PHONY : src/lib/tools.cpp.s
 
-src/lib/track.o: src/lib/track.cpp.o
+src/lib/tracker.o: src/lib/tracker.cpp.o
 
-.PHONY : src/lib/track.o
+.PHONY : src/lib/tracker.o
 
 # target to build an object file
-src/lib/track.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_yolonode.dir/build.make CMakeFiles/detect_mot_yolonode.dir/src/lib/track.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_socketnode.dir/build.make CMakeFiles/detect_mot_socketnode.dir/src/lib/track.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_tracknode.dir/build.make CMakeFiles/detect_mot_tracknode.dir/src/lib/track.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.o
-.PHONY : src/lib/track.cpp.o
+src/lib/tracker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_yolonode.dir/build.make CMakeFiles/detect_mot_yolonode.dir/src/lib/tracker.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_socketnode.dir/build.make CMakeFiles/detect_mot_socketnode.dir/src/lib/tracker.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_tracknode.dir/build.make CMakeFiles/detect_mot_tracknode.dir/src/lib/tracker.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.o
+.PHONY : src/lib/tracker.cpp.o
 
-src/lib/track.i: src/lib/track.cpp.i
+src/lib/tracker.i: src/lib/tracker.cpp.i
 
-.PHONY : src/lib/track.i
+.PHONY : src/lib/tracker.i
 
 # target to preprocess a source file
-src/lib/track.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_yolonode.dir/build.make CMakeFiles/detect_mot_yolonode.dir/src/lib/track.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_socketnode.dir/build.make CMakeFiles/detect_mot_socketnode.dir/src/lib/track.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_tracknode.dir/build.make CMakeFiles/detect_mot_tracknode.dir/src/lib/track.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.i
-.PHONY : src/lib/track.cpp.i
+src/lib/tracker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_yolonode.dir/build.make CMakeFiles/detect_mot_yolonode.dir/src/lib/tracker.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_socketnode.dir/build.make CMakeFiles/detect_mot_socketnode.dir/src/lib/tracker.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_tracknode.dir/build.make CMakeFiles/detect_mot_tracknode.dir/src/lib/tracker.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.i
+.PHONY : src/lib/tracker.cpp.i
 
-src/lib/track.s: src/lib/track.cpp.s
+src/lib/tracker.s: src/lib/tracker.cpp.s
 
-.PHONY : src/lib/track.s
+.PHONY : src/lib/tracker.s
 
 # target to generate assembly for a file
-src/lib/track.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_yolonode.dir/build.make CMakeFiles/detect_mot_yolonode.dir/src/lib/track.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_socketnode.dir/build.make CMakeFiles/detect_mot_socketnode.dir/src/lib/track.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_tracknode.dir/build.make CMakeFiles/detect_mot_tracknode.dir/src/lib/track.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/track.cpp.s
-.PHONY : src/lib/track.cpp.s
+src/lib/tracker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_yolonode.dir/build.make CMakeFiles/detect_mot_yolonode.dir/src/lib/tracker.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_socketnode.dir/build.make CMakeFiles/detect_mot_socketnode.dir/src/lib/tracker.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_tracknode.dir/build.make CMakeFiles/detect_mot_tracknode.dir/src/lib/tracker.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detect_mot_detectnode.dir/build.make CMakeFiles/detect_mot_detectnode.dir/src/lib/tracker.cpp.s
+.PHONY : src/lib/tracker.cpp.s
 
 src/socketnode.o: src/socketnode.cpp.o
 
@@ -2652,12 +2688,15 @@ help:
 	@echo "... src/lib/matcher.o"
 	@echo "... src/lib/matcher.i"
 	@echo "... src/lib/matcher.s"
+	@echo "... src/lib/matcher2.o"
+	@echo "... src/lib/matcher2.i"
+	@echo "... src/lib/matcher2.s"
 	@echo "... src/lib/tools.o"
 	@echo "... src/lib/tools.i"
 	@echo "... src/lib/tools.s"
-	@echo "... src/lib/track.o"
-	@echo "... src/lib/track.i"
-	@echo "... src/lib/track.s"
+	@echo "... src/lib/tracker.o"
+	@echo "... src/lib/tracker.i"
+	@echo "... src/lib/tracker.s"
 	@echo "... src/socketnode.o"
 	@echo "... src/socketnode.i"
 	@echo "... src/socketnode.s"

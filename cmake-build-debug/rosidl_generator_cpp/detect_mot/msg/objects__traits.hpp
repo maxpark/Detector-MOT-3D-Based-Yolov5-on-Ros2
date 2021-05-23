@@ -11,7 +11,8 @@
 #include <type_traits>
 
 // Include directives for member types
-// Member 'header'
+// Member 'front_header'
+// Member 'back_header'
 #include "std_msgs/msg/header__traits.hpp"
 
 namespace rosidl_generator_traits

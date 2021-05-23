@@ -20,6 +20,7 @@
 struct Object{
     std::string name;
     int classID;
+    int ID;
     cv::Rect area;
 };
 class Detector {

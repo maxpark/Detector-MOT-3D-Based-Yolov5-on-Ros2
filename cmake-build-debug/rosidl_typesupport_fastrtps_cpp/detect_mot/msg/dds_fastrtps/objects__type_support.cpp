@@ -39,6 +39,29 @@ max_serialized_size_Header(
 }  // namespace msg
 }  // namespace std_msgs
 
+namespace std_msgs
+{
+namespace msg
+{
+namespace typesupport_fastrtps_cpp
+{
+bool cdr_serialize(
+  const std_msgs::msg::Header &,
+  eprosima::fastcdr::Cdr &);
+bool cdr_deserialize(
+  eprosima::fastcdr::Cdr &,
+  std_msgs::msg::Header &);
+size_t get_serialized_size(
+  const std_msgs::msg::Header &,
+  size_t current_alignment);
+size_t
+max_serialized_size_Header(
+  bool & full_bounded,
+  size_t current_alignment);
+}  // namespace typesupport_fastrtps_cpp
+}  // namespace msg
+}  // namespace std_msgs
+
 namespace detect_mot
 {
 namespace msg
@@ -101,9 +124,13 @@ cdr_serialize(
   const detect_mot::msg::Objects & ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
-  // Member: header
+  // Member: front_header
   std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
-    ros_message.header,
+    ros_message.front_header,
+    cdr);
+  // Member: back_header
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.back_header,
     cdr);
   // Member: objects_front
   {
@@ -134,9 +161,13 @@ cdr_deserialize(
   eprosima::fastcdr::Cdr & cdr,
   detect_mot::msg::Objects & ros_message)
 {
-  // Member: header
+  // Member: front_header
   std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
-    cdr, ros_message.header);
+    cdr, ros_message.front_header);
+
+  // Member: back_header
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.back_header);
 
   // Member: objects_front
   {
@@ -178,11 +209,16 @@ get_serialized_size(
   (void)padding;
   (void)wchar_size;
 
-  // Member: header
+  // Member: front_header
 
   current_alignment +=
     std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
-    ros_message.header, current_alignment);
+    ros_message.front_header, current_alignment);
+  // Member: back_header
+
+  current_alignment +=
+    std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.back_header, current_alignment);
   // Member: objects_front
   {
     size_t array_size = ros_message.objects_front.size();
@@ -228,7 +264,19 @@ max_serialized_size_Objects(
   (void)full_bounded;
 
 
-  // Member: header
+  // Member: front_header
+  {
+    size_t array_size = 1;
+
+
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment +=
+        std_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Header(
+        full_bounded, current_alignment);
+    }
+  }
+
+  // Member: back_header
   {
     size_t array_size = 1;
 

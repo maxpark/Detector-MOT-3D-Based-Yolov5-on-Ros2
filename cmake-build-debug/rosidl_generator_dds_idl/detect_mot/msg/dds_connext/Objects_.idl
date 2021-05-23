@@ -16,7 +16,8 @@ module dds_ {
 
 
 struct Objects_ {
-std_msgs::msg::dds_::Header_ header_;
+std_msgs::msg::dds_::Header_ front_header_;
+std_msgs::msg::dds_::Header_ back_header_;
 sequence<detect_mot::msg::dds_::Detection2d_> objects_front_;
 
 sequence<detect_mot::msg::dds_::Detection2d_> objects_back_;

@@ -35,6 +35,27 @@ bool convert_dds_message_to_ros(
 }  // namespace typesupport_connext_cpp
 }  // namespace msg
 }  // namespace std_msgs
+namespace std_msgs
+{
+namespace msg
+{
+namespace dds_
+{
+class Header_;
+}  // namespace dds_
+
+namespace typesupport_connext_cpp
+{
+
+bool convert_ros_message_to_dds(
+  const std_msgs::msg::Header &,
+  std_msgs::msg::dds_::Header_ &);
+bool convert_dds_message_to_ros(
+  const std_msgs::msg::dds_::Header_ &,
+  std_msgs::msg::Header &);
+}  // namespace typesupport_connext_cpp
+}  // namespace msg
+}  // namespace std_msgs
 namespace detect_mot
 {
 namespace msg
@@ -100,11 +121,20 @@ convert_ros_message_to_dds(
   const detect_mot::msg::Objects & ros_message,
   detect_mot::msg::dds_::Objects_ & dds_message)
 {
-  // member.name header
+  // member.name front_header
   if (
     !std_msgs::msg::typesupport_connext_cpp::convert_ros_message_to_dds(
-      ros_message.header,
-      dds_message.header_))
+      ros_message.front_header,
+      dds_message.front_header_))
+  {
+    return false;
+  }
+
+  // member.name back_header
+  if (
+    !std_msgs::msg::typesupport_connext_cpp::convert_ros_message_to_dds(
+      ros_message.back_header,
+      dds_message.back_header_))
   {
     return false;
   }
@@ -169,11 +199,20 @@ convert_dds_message_to_ros(
   const detect_mot::msg::dds_::Objects_ & dds_message,
   detect_mot::msg::Objects & ros_message)
 {
-  // member.name header
+  // member.name front_header
   if (
     !std_msgs::msg::typesupport_connext_cpp::convert_dds_message_to_ros(
-      dds_message.header_,
-      ros_message.header))
+      dds_message.front_header_,
+      ros_message.front_header))
+  {
+    return false;
+  }
+
+  // member.name back_header
+  if (
+    !std_msgs::msg::typesupport_connext_cpp::convert_dds_message_to_ros(
+      dds_message.back_header_,
+      ros_message.back_header))
   {
     return false;
   }

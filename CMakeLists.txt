@@ -26,6 +26,8 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
+find_package(laser_geometry REQUIRED)
+find_package(tf2 REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(sensor_msgs REQUIRED)
 #find_package(rosidl_tutorials_msgs REQUIRED)
@@ -92,9 +94,10 @@ cuda_add_library(myplugins SHARED ./include/detector/yololayer.cu)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Ofast -Wfatal-errors -D_MWAITXINTRIN_H_INCLUDED")
 
 aux_source_directory(src/lib LIB_LIST)
+aux_source_directory(src/lidar_person_detect LIDAR_LIST)
 
 add_executable(${PROJECT_NAME}_yolonode src/yolonode.cpp    ${LIB_LIST})
-add_executable(${PROJECT_NAME}_detectnode src/detectnode.cpp ${LIB_LIST})
+add_executable(${PROJECT_NAME}_detectnode src/detectnode.cpp ${LIB_LIST} ) #${LIDAR_LIST}
 add_executable(${PROJECT_NAME}_socketnode src/socketnode.cpp ${LIB_LIST}  include/proto/track_frame.pb.cc)
 add_executable(${PROJECT_NAME}_tracknode src/tracknode.cpp  ${LIB_LIST}  include/proto/track_frame.pb.cc)
 
@@ -141,6 +144,8 @@ ament_target_dependencies(${PROJECT_NAME}_detectnode
         sensor_msgs
         geometry_msgs
         cv_bridge
+        tf2
+        laser_geometry
         )
 ament_target_dependencies(${PROJECT_NAME}_socketnode
         rclcpp

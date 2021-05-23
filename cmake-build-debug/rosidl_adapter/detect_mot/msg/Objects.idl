@@ -8,7 +8,9 @@
 module detect_mot {
   module msg {
     struct Objects {
-      std_msgs::msg::Header header;
+      std_msgs::msg::Header front_header;
+
+      std_msgs::msg::Header back_header;
 
       sequence<detect_mot::msg::Detection2d> objects_front;
 

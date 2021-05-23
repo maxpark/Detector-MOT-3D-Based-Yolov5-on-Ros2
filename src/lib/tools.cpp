@@ -258,3 +258,42 @@ bool loadLidarData(const std::string& filename, costmap::LaserScan& ldata, costm
     ifs.close();
     return true;
 }
+cv::Point2f transformLidarToRobot(cv::Point2f point_laser, float lidar_link)
+{
+    cv::Point2f point_robot;
+    point_robot.x = point_laser.x + lidar_link;
+    point_robot.y = point_laser.y;
+    return point_robot;
+}
+pcl::PointCloud<pcl::PointXYZI>::Ptr prase_data(costmap::LaserScan laserscan,float pose_x,float  pose_z,float lx,float ly) {
+    std::vector<costmap::NumWithAngular> lidar_data_;
+    for (int i = 0; i < laserscan.ranges.size(); i++) {
+        if (laserscan.ranges[i].num > 0.25) {
+            lidar_data_.push_back(laserscan.ranges[i]);
+        } else {
+            costmap::NumWithAngular invalid_point;
+            invalid_point.angular = laserscan.ranges[i].angular;
+            invalid_point.num = 10.0;
+            lidar_data_.push_back(invalid_point);
+        }
+
+    }
+    std::sort(lidar_data_.begin(), lidar_data_.end(),
+              [](costmap::NumWithAngular &a, costmap::NumWithAngular &b) { return a.angular < b.angular; });
+    pcl::PointCloud<pcl::PointXYZI>::Ptr lidar_points(new pcl::PointCloud<pcl::PointXYZI>);
+    for (int j = 0; j < lidar_data_.size(); j++) {
+        auto p = lidar_data_[j];
+        if (p.num > 0.25) {
+            //trans to robot pts
+            float x = p.num * cos(p.angular);
+            float y = p.num * sin(p.angular);
+            cv::Point2f pt_l(x, y);
+            cv::Point2f pt_r = transformLidarToRobot(pt_l, pose_x);
+            pcl::PointXYZI p;
+            p.x=pt_r.x;p.y=pt_r.y;p.z=pose_z;p.intensity=0;
+            if(p.x<lx&&p.y<ly)
+                lidar_points->points.push_back(p);
+        }
+    }
+    return lidar_points;
+}

@@ -26,14 +26,14 @@
 #include<unistd.h>
 #include "proto/track_frame.pb.h"
 #include "cv_bridge/cv_bridge.h"
-
+#include "thread"
 using namespace std::chrono_literals;
 int socket_fd,fd;
 class SocketNode : public rclcpp::Node{
 private:
     rclcpp::TimerBase::SharedPtr timer_1,timer_2;
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr publisher_rgbd;
-    rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr publisher_rgbd_img;
+//    rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr publisher_rgbd_img;
     rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_socket;
     rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr sub_frame;
     rclcpp::Clock clock;
@@ -58,12 +58,17 @@ private:
             header_points.stamp.sec=time_mat/1000;
             header_points.stamp.nanosec=time_mat%1000;
 //            time_vec[time_mat]=tim;
+        } else
+        {
+            return;
         }
 //        if (time_vec.size()>100)
 //            time_vec.erase(time_vec.begin());
         int size = recv(fd, rev_rgbd_data, 50880,MSG_WAITALL);
         if (size>0){
-            RCLCPP_INFO(this->get_logger(),"--data-recive---");
+            auto time=clock.now();
+            RCLCPP_INFO(this->get_logger(),"ros_time_now---"+std::to_string(time.nanoseconds()/1000000));
+//            RCLCPP_INFO(this->get_logger(),"--data-recive---");
 //                std::cout<<"SIZE:"<<size<<std::endl;
 //                std::cout<<"Recv_data:"<<rev_rgbd_data[100]<<rev_rgbd_data[1000]<<rev_rgbd_data[10000]<<rev_rgbd_data[20000]<<rev_rgbd_data[30000]<<std::endl;
 //            char rgbd_data[50880],time_data[8];
@@ -101,7 +106,7 @@ private:
         img_rgbd.header.stamp=header_points.stamp;
         img_rgbd.header.frame_id="map";
         cv_bridge::CvImage( img_rgbd.header,"mono16",depth_mat).toImageMsg(img_rgbd);
-        publisher_rgbd_img->publish(img_rgbd);
+//        publisher_rgbd_img->publish(img_rgbd);
     }
     void send_message(){
         RCLCPP_INFO(this->get_logger(),"send call back");
@@ -140,7 +145,8 @@ private:
         RCLCPP_INFO(this->get_logger(),"Time of remat:sys_get:"+std::to_string((float)(time_b-time_f)/CLOCKS_PER_SEC*1000)+"cv:"+std::to_string(t));
     }
     void topic_callback_frame(geometry_msgs::msg::PoseArray::SharedPtr msg){
-//        std::cout<<"send_frame"<<std::endl;
+        auto time=clock.now();
+        RCLCPP_INFO(this->get_logger(),"frame_time_now---"+std::to_string(time.nanoseconds()/1000000));
         long long time_frame;
         probf::TrackFrame track_frame;
 //        auto tim=std::clock();
@@ -184,12 +190,12 @@ public:
     {
         publisher_rgbd = this->create_publisher<sensor_msgs::msg::PointCloud2>("/pointscloud_rgbd", 1);
         publisher_socket = this->create_publisher<std_msgs::msg::Int32>("/socket_fd", 1);
-        publisher_rgbd_img = this->create_publisher<sensor_msgs::msg::Image>("rgbd_img",1);
-        timer_1 = this->create_wall_timer(20ms, std::bind(&SocketNode::timer_callback, this));
+//        publisher_rgbd_img = this->create_publisher<sensor_msgs::msg::Image>("/rgbd_img",1);
+        timer_1 = this->create_wall_timer(30ms, std::bind(&SocketNode::timer_callback, this));
 //        timer_2 = this->create_wall_timer(10ms, std::bind(&SocketNode::send_message, this));
 //        timer_3 = this->create_wall_timer(10ms, std::bind(&SocketNode::send_track, this));
 
-        sub_frame=this->create_subscription<geometry_msgs::msg::PoseArray>("/ph/core/track",1,std::bind((&SocketNode::topic_callback_frame),this,std::placeholders::_1));
+        sub_frame = this->create_subscription<geometry_msgs::msg::PoseArray>("/track",10,std::bind((&SocketNode::topic_callback_frame),this,std::placeholders::_1));
 
         ///socket/////////
         //1.创建一个socket
@@ -258,6 +264,7 @@ public:
 //        U_in={u_ins.at(0),u_ins.at(1),u_ins.at(2),u_ins.at(3)};//107.282, 107.282,105.0, 60.0
         U_in={107.282, 107.282,106.0, 60.0};
         std::cout<<"reparam_Uin:"<<U_in<<std::endl;
+
     }
 };
 

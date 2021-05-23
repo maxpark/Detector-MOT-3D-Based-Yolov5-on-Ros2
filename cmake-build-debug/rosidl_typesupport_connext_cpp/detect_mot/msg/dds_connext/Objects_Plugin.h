@@ -9,8 +9,8 @@ For more information, type 'rtiddsgen -help' at a command shell
 or consult the RTI Connext manual.
 */
 
-#ifndef Objects_Plugin_222506640_h
-#define Objects_Plugin_222506640_h
+#ifndef Objects_Plugin_222506689_h
+#define Objects_Plugin_222506689_h
 
 #include "Objects_.h"
 
@@ -284,5 +284,5 @@ namespace detect_mot {
 #define NDDSUSERDllExport
 #endif
 
-#endif /* Objects_Plugin_222506640_h */
+#endif /* Objects_Plugin_222506689_h */
 

@@ -18,7 +18,8 @@ extern "C"
 // Constants defined in the message
 
 // Include directives for member types
-// Member 'header'
+// Member 'front_header'
+// Member 'back_header'
 #include "std_msgs/msg/header__struct.h"
 // Member 'objects_front'
 // Member 'objects_back'
@@ -27,7 +28,8 @@ extern "C"
 // Struct defined in msg/Objects in the package detect_mot.
 typedef struct detect_mot__msg__Objects
 {
-  std_msgs__msg__Header header;
+  std_msgs__msg__Header front_header;
+  std_msgs__msg__Header back_header;
   detect_mot__msg__Detection2d__Sequence objects_front;
   detect_mot__msg__Detection2d__Sequence objects_back;
 } detect_mot__msg__Objects;

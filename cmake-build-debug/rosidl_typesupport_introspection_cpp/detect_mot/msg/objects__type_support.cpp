@@ -79,16 +79,31 @@ void resize_function__Objects__objects_back(void * untyped_member, size_t size)
   member->resize(size);
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember Objects_message_member_array[3] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember Objects_message_member_array[4] = {
   {
-    "header",  // name
+    "front_header",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Header>(),  // members of sub message
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(detect_mot::msg::Objects, header),  // bytes offset in struct
+    offsetof(detect_mot::msg::Objects, front_header),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    NULL  // resize(index) function pointer
+  },
+  {
+    "back_header",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Header>(),  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(detect_mot::msg::Objects, back_header),  // bytes offset in struct
     nullptr,  // default value
     nullptr,  // size() function pointer
     nullptr,  // get_const(index) function pointer
@@ -130,7 +145,7 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember Objects_messa
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers Objects_message_members = {
   "detect_mot::msg",  // message namespace
   "Objects",  // message name
-  3,  // number of fields
+  4,  // number of fields
   sizeof(detect_mot::msg::Objects),
   Objects_message_member_array  // message members
 };

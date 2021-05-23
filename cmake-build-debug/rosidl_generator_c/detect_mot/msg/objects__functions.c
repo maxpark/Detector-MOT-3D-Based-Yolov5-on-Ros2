@@ -10,7 +10,8 @@
 
 
 // Include directives for member types
-// Member `header`
+// Member `front_header`
+// Member `back_header`
 #include "std_msgs/msg/header__functions.h"
 // Member `objects_front`
 // Member `objects_back`
@@ -22,8 +23,13 @@ detect_mot__msg__Objects__init(detect_mot__msg__Objects * msg)
   if (!msg) {
     return false;
   }
-  // header
-  if (!std_msgs__msg__Header__init(&msg->header)) {
+  // front_header
+  if (!std_msgs__msg__Header__init(&msg->front_header)) {
+    detect_mot__msg__Objects__fini(msg);
+    return false;
+  }
+  // back_header
+  if (!std_msgs__msg__Header__init(&msg->back_header)) {
     detect_mot__msg__Objects__fini(msg);
     return false;
   }
@@ -46,8 +52,10 @@ detect_mot__msg__Objects__fini(detect_mot__msg__Objects * msg)
   if (!msg) {
     return;
   }
-  // header
-  std_msgs__msg__Header__fini(&msg->header);
+  // front_header
+  std_msgs__msg__Header__fini(&msg->front_header);
+  // back_header
+  std_msgs__msg__Header__fini(&msg->back_header);
   // objects_front
   detect_mot__msg__Detection2d__Sequence__fini(&msg->objects_front);
   // objects_back

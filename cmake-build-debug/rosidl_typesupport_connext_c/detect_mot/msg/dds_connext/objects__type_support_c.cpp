@@ -37,9 +37,11 @@ extern "C"
 #endif
 
 // Include directives for member types
-// Member 'header'
+// Member 'front_header'
+// Member 'back_header'
 #include "std_msgs/msg/header__struct.h"
-// Member 'header'
+// Member 'front_header'
+// Member 'back_header'
 #include "std_msgs/msg/header__functions.h"
 // Member 'objects_front'
 // Member 'objects_back'
@@ -49,7 +51,8 @@ extern "C"
 #include "detect_mot/msg/detection2d__functions.h"
 
 // forward declare type support functions
-// Member 'header'
+// Member 'front_header'
+// Member 'back_header'
 ROSIDL_TYPESUPPORT_CONNEXT_C_IMPORT_detect_mot
 const rosidl_message_type_support_t *
   ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
@@ -85,14 +88,26 @@ _Objects__convert_ros_to_dds(const void * untyped_ros_message, void * untyped_dd
     static_cast<const detect_mot__msg__Objects *>(untyped_ros_message);
   detect_mot::msg::dds_::Objects_ * dds_message =
     static_cast<detect_mot::msg::dds_::Objects_ *>(untyped_dds_message);
-  // Member name: header
+  // Member name: front_header
   {
     const message_type_support_callbacks_t * std_msgs__msg__Header__callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_connext_c, std_msgs, msg, Header
       )()->data);
     if (!std_msgs__msg__Header__callbacks->convert_ros_to_dds(
-        &ros_message->header, &dds_message->header_))
+        &ros_message->front_header, &dds_message->front_header_))
+    {
+      return false;
+    }
+  }
+  // Member name: back_header
+  {
+    const message_type_support_callbacks_t * std_msgs__msg__Header__callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_connext_c, std_msgs, msg, Header
+      )()->data);
+    if (!std_msgs__msg__Header__callbacks->convert_ros_to_dds(
+        &ros_message->back_header, &dds_message->back_header_))
     {
       return false;
     }
@@ -177,7 +192,7 @@ _Objects__convert_dds_to_ros(const void * untyped_dds_message, void * untyped_ro
     static_cast<const detect_mot::msg::dds_::Objects_ *>(untyped_dds_message);
   detect_mot__msg__Objects * ros_message =
     static_cast<detect_mot__msg__Objects *>(untyped_ros_message);
-  // Member name: header
+  // Member name: front_header
   {
     const rosidl_message_type_support_t * ts =
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
@@ -186,7 +201,18 @@ _Objects__convert_dds_to_ros(const void * untyped_dds_message, void * untyped_ro
       Header)();
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(ts->data);
-    callbacks->convert_dds_to_ros(&dds_message->header_, &ros_message->header);
+    callbacks->convert_dds_to_ros(&dds_message->front_header_, &ros_message->front_header);
+  }
+  // Member name: back_header
+  {
+    const rosidl_message_type_support_t * ts =
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+      rosidl_typesupport_connext_c,
+      std_msgs, msg,
+      Header)();
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(ts->data);
+    callbacks->convert_dds_to_ros(&dds_message->back_header_, &ros_message->back_header);
   }
   // Member name: objects_front
   {

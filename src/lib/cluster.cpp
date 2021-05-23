@@ -98,6 +98,89 @@ void DBSCAN::DBSCAN_Cluster(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud,cv::Size
     Roc.cloud_results.reset(new pcl::PointCloud<pcl::PointXYZI>);//重置点云以及解决 全局DBSCAN 产生的BUG
     pointcloudf.reset(new pcl::PointCloud<pcl::PointXYZI>);
 }
+//DBSCAN密度聚类 single Lidar
+void DBSCAN::DBSCAN_lidar_Cluster(pcl::PointCloud<pcl::PointXYZI>::Ptr &cloud, cv::Size size) {
+    //      show_point_cloud(cloud,"Original--");
+
+    Imagesize.height=size.height*Stride;
+    Imagesize.width=size.width*Stride;
+    image_boundary.x_max=Imagesize.width;
+    image_boundary.y_max=Imagesize.height;
+    image_boundary.x_min=0;
+    image_boundary.y_min=0;
+    //降采样 体素5cm
+//    pcl::VoxelGrid<pcl::PointXYZI> vg;
+//    vg.setInputCloud(cloud);
+//    vg.setLeafSize(0.05f, 0.05f, 0.05f);
+//    vg.filter(*cloud);
+//    pointcloudf=cloud;
+//      show_point_cloud(cloud,"After downsample--");
+    //KD-tree加速的密度聚类
+    pcl::search::KdTree<pcl::PointXYZI>::Ptr tree(new  pcl::search::KdTree<pcl::PointXYZI>);
+    tree->setInputCloud(cloud);
+    DBSCANKdtreeCluster<pcl::PointXYZI> ec;
+    ec.setCorePointMinPts(2);
+    ec.setClusterTolerance(0.02);
+    ec.setMinClusterSize(2);
+    ec.setMaxClusterSize(1000);
+    ec.setSearchMethod(tree);
+    ec.setInputCloud(cloud);
+    ec.extract(Roc.cluster_indices);
+    int classindex=0;//标记类别编号
+    Roc.clustering_nums=Roc.cluster_indices.size();
+//    std::cout<<"After downsampled: "<<cloud->size()<<std::endl;
+//    std::cout<<"Nums of Clusters: "<<Roc.cluster_indices.size()<<std::endl;
+//      pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_clustered(new pcl::PointCloud<pcl::PointXYZI>);
+    Roc.ClusterRebuildImg=cv::Mat::zeros(Imagesize.height,Imagesize.width,CV_8UC(1));//重建聚类图
+    for (auto it:Roc.cluster_indices) {
+        Roc.pointcloud_clustered[classindex].ponits3d.reset(new pcl::PointCloud<pcl::PointXYZI>);//点云记得重置
+        int minx = Imagesize.width, miny = Imagesize.width, maxx = 0,maxy =0 ;//寻找相机投影下的边框
+        for (auto pit:it.indices){
+            pcl::PointXYZI temp;
+            if (pit>=cloud->points.size())
+                std::cout<<"Out of the range:"<<pit<<std::endl;
+            else
+                temp=cloud->points.at(pit);
+            temp.intensity=classindex;
+            Roc.cloud_results->points.push_back(temp);
+            auto Pix=PointConvertToPix(temp,Intrinsics,T_pose);//Pix属于像平面
+//            std::cout<<"point="<<Pix.x()<<" "<<Pix.y()<<" "<<Pix.z()<<std::endl;
+            Eigen::Vector2i pix={static_cast<int>(Pix.x())-image_boundary.x_min,static_cast<int>(Pix.y())-image_boundary.y_min};//pix转为 像素坐标
+//            std::cout<<"point="<<pix.x()<<" "<<pix.y()<<std::endl;
+            if (Pix.x()>image_boundary.x_min&&Pix.x()<image_boundary.x_max&&Pix.y()>image_boundary.y_min&&Pix.y()<image_boundary.y_max&&Pix.z()>0){//像素区域内
+                Roc.pointcloud_clustered[classindex].ponits3d->points.push_back(temp);
+                Roc.pointcloud_clustered[classindex].centerpoint.x+=temp.x;
+                Roc.pointcloud_clustered[classindex].centerpoint.y+=temp.y;
+                Roc.pointcloud_clustered[classindex].centerpoint.z+=temp.z;
+                Roc.ClusterRebuildImg.at<uint8_t>(pix.y(),pix.x())=(classindex+1)*255/Roc.clustering_nums;
+                if (minx > pix.x()) minx = pix.x();if (miny > pix.y()) miny = pix.y();if (maxx < pix.x()) maxx = pix.x();if (maxy < pix.y()) maxy = pix.y();//寻找边界
+            }
+        }
+        if (minx <0) minx = 0;if (miny < 0) miny = 0;if (maxx >=size.width) maxx = size.width-1;if (maxy >=size.height) maxy = size.height-1;//限制矩形框大小位于RGB图像范围内
+        if (!Roc.pointcloud_clustered[classindex].ponits3d->points.empty()){
+            Roc.pointcloud_clustered[classindex].images=cv::Rect(minx,miny,(maxx - minx), 10);
+//            std::cout<<"RECT_cluster:"<<minx<<" "<<miny<<" "<<maxx<<" "<<maxy<<std::endl;
+            Roc.pointcloud_clustered[classindex].centerpoint.x/=Roc.pointcloud_clustered[classindex].ponits3d->points.size();
+            Roc.pointcloud_clustered[classindex].centerpoint.y/=Roc.pointcloud_clustered[classindex].ponits3d->points.size();
+            Roc.pointcloud_clustered[classindex].centerpoint.z/=Roc.pointcloud_clustered[classindex].ponits3d->points.size();
+        }
+        classindex++;
+//        std::cout<<classindex<<std::endl;
+    }
+    Roc.cloud_results.reset(new pcl::PointCloud<pcl::PointXYZI>);//重置点云以及解决 全局DBSCAN 产生的BUG
+    pointcloudf.reset(new pcl::PointCloud<pcl::PointXYZI>);
+    //可视化
+//    show_point_cloud(Roc.cloud_results,"After DBSCAN--");//可视化点云
+//
+//    for (auto img:Roc.pointcloud_clustered) {
+//        //绘制聚类边界框
+//        cv::rectangle(Roc.ClusterRebuildImg,img.second.images,255,1);
+//    }
+////    cv::resize(Roc.ClusterRebuildImg,Roc.ClusterRebuildImg,cv::Size(1280,720));
+//    cv::imshow("Clustered Image",Roc.ClusterRebuildImg);//可视化点云聚类后在像平面的图像
+//    cv::waitKey(0);
+
+}
 std::map<int,Oneclass> DBSCAN::ReportClusteredResults(){
     return Roc.pointcloud_clustered;
 }

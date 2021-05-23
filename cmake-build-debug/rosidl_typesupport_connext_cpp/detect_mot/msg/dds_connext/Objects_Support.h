@@ -8,8 +8,8 @@ For more information, type 'rtiddsgen -help' at a command shell
 or consult the RTI Connext manual.
 */
 
-#ifndef Objects_Support_222506640_h
-#define Objects_Support_222506640_h
+#ifndef Objects_Support_222506689_h
+#define Objects_Support_222506689_h
 
 /* Uses */
 #include "Objects_.h"
@@ -64,5 +64,5 @@ namespace detect_mot {
     } /* namespace msg  */
 } /* namespace detect_mot  */
 
-#endif  /* Objects_Support_222506640_h */
+#endif  /* Objects_Support_222506689_h */
 

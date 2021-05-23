@@ -25,7 +25,8 @@
 #endif
 
 // Include directives for member types
-// Member 'header'
+// Member 'front_header'
+// Member 'back_header'
 #include "std_msgs/msg/header__struct.hpp"
 // Member 'objects_front'
 // Member 'objects_back'
@@ -50,21 +51,26 @@ struct Objects_
   using Type = Objects_<ContainerAllocator>;
 
   explicit Objects_(rosidl_generator_cpp::MessageInitialization _init = rosidl_generator_cpp::MessageInitialization::ALL)
-  : header(_init)
+  : front_header(_init),
+    back_header(_init)
   {
     (void)_init;
   }
 
   explicit Objects_(const ContainerAllocator & _alloc, rosidl_generator_cpp::MessageInitialization _init = rosidl_generator_cpp::MessageInitialization::ALL)
-  : header(_alloc, _init)
+  : front_header(_alloc, _init),
+    back_header(_alloc, _init)
   {
     (void)_init;
   }
 
   // field types and members
-  using _header_type =
+  using _front_header_type =
     std_msgs::msg::Header_<ContainerAllocator>;
-  _header_type header;
+  _front_header_type front_header;
+  using _back_header_type =
+    std_msgs::msg::Header_<ContainerAllocator>;
+  _back_header_type back_header;
   using _objects_front_type =
     std::vector<detect_mot::msg::Detection2d_<ContainerAllocator>, typename ContainerAllocator::template rebind<detect_mot::msg::Detection2d_<ContainerAllocator>>::other>;
   _objects_front_type objects_front;
@@ -73,10 +79,16 @@ struct Objects_
   _objects_back_type objects_back;
 
   // setters for named parameter idiom
-  Type & set__header(
+  Type & set__front_header(
     const std_msgs::msg::Header_<ContainerAllocator> & _arg)
   {
-    this->header = _arg;
+    this->front_header = _arg;
+    return *this;
+  }
+  Type & set__back_header(
+    const std_msgs::msg::Header_<ContainerAllocator> & _arg)
+  {
+    this->back_header = _arg;
     return *this;
   }
   Type & set__objects_front(
@@ -134,7 +146,10 @@ struct Objects_
   // comparison operators
   bool operator==(const Objects_ & other) const
   {
-    if (this->header != other.header) {
+    if (this->front_header != other.front_header) {
+      return false;
+    }
+    if (this->back_header != other.back_header) {
       return false;
     }
     if (this->objects_front != other.objects_front) {

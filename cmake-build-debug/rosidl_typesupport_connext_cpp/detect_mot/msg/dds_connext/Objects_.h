@@ -9,8 +9,8 @@ For more information, type 'rtiddsgen -help' at a command shell
 or consult the RTI Connext manual.
 */
 
-#ifndef Objects__222506640_h
-#define Objects__222506640_h
+#ifndef Objects__222506689_h
+#define Objects__222506689_h
 
 #ifndef NDDS_STANDALONE_TYPE
 #ifndef ndds_cpp_h
@@ -45,7 +45,8 @@ namespace detect_mot {
                 typedef Objects_DataReader DataReader;
                 #endif
 
-                std_msgs::msg::dds_::Header_   header_ ;
+                std_msgs::msg::dds_::Header_   front_header_ ;
+                std_msgs::msg::dds_::Header_   back_header_ ;
                 detect_mot::msg::dds_::Detection2d_Seq  objects_front_ ;
                 detect_mot::msg::dds_::Detection2d_Seq  objects_back_ ;
 
